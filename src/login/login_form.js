@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Container, Button, Form } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+//still need to import whatever I need to get Redux working
 
 class Login extends Component {
     state = {
@@ -25,36 +27,22 @@ class Login extends Component {
         .then(res => res.json())
         .then(response => {
             console.log(response)
+            if (response.errors) {
+                alert(response.errors)
+            } else {
+                //REDUX
+                this.props.logInUser(response)
+                console.log("POST-SIGNIN PROPS", this.props.currentUser)
+                //REDIRECT
+            }
         })
     }
 
-    // const SET_LOGIN_PENDING = 'SET_LOGIN_PENDING';
-    // const SET_LOGIN_SUCCESS = 'SET_LOGIN_SUCCESS';
-    // const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
-
-    // function setLoginPending(isLoginPending) {
-    //     return {
-    //         type: SET_LOGIN_PENDING,
-    //         isLoginPending
-    //     }
-    // }
-
-    // function setLoginSuccess(isLoginSuccess) {
-    //     return {
-    //         type: SET_LOGIN_Success,
-    //         isLoginSuccess
-    //     }
-    // }
-
-    // function setLoginError(isLoginError) {
-    //     return {
-    //         type: SET_LOGIN_Error,
-    //         isLoginError
-    //     }
-    // }
     render() {
 
         console.log(this.state)
+        console.log("STORE PROPS", this.props)
+
         return (
 
 
@@ -76,6 +64,19 @@ class Login extends Component {
             </Container>
         )
     }
+
+    
+}
+function mapStateToProps(state) {
+    return state
 }
 
-export default Login
+function mapDispatchToProps(dispatch){
+    return {
+        logInUser: (user) => {
+            dispatch({type: "LOG_IN", payload: user})
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
