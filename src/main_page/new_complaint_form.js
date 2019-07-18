@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Grid, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import NewComplaintTypeForm from './new_complaint_type_form'
 
 
 
@@ -18,15 +19,25 @@ class NewComplaintForm extends Component {
         userId: this.props.id,
         complaintTypeId: 0,
         complaintText: null,
-        complaintSeverity: null
+        complaintSeverity: null,
+        rerender: false
     }
     
     handleRadio = (e, { value }) => this.setState({ complaintTypeId: value })
 
+    checkForComplaintTypeAddition = () => {
+        mapStateToProps()
+    }
+
+    rerender = () => {
+
+    }
 
     render() {
+        // console.log('do you rerender?')
+        // console.log('UPDATED PROPS', this.props)
         // console.log(this.props)
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <Container>
             <Grid columns={2} stackable >
@@ -57,8 +68,10 @@ class NewComplaintForm extends Component {
                                 checked={this.state.complaintTypeId === complaintType.id}
                                 onChange={this.handleRadio}
                                 key={complaintType.id}
+                                style={{color: complaintType.color}}
                             />
                         }, this)}
+                        <NewComplaintTypeForm />
                     </Grid.Column>
 
                 </Grid.Row>
@@ -69,6 +82,7 @@ class NewComplaintForm extends Component {
 }
 
 function mapStateToProps(state) {
+    // console.log(state)
     return state.currentUser
 }
   
