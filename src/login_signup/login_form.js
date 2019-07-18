@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Container, Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 //still need to import whatever I need to get Redux working
 
@@ -26,12 +26,13 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.errors) {
                 alert(response.errors)
             } else {
                 //REDUX
                 this.props.logInUser(response)
+                localStorage.setItem("user_id", response.user.id)
                 console.log("POST-SIGNIN PROPS", this.props.currentUser)
                 //REDIRECT
             }
@@ -39,29 +40,23 @@ class Login extends Component {
     }
 
     render() {
+        // console.log(this.state)
+        // console.log("STORE PROPS", this.props)
+        return (   
+            <div>
+            <h1>Log In!</h1>         
+            <Form size="large" onSubmit={this.handleSubmit}>
+                <Form.Field>
+                    <Form.Input onChange={this.handleChange} name="username" label='Username' placeholder='Username'/>
+                </Form.Field>
 
-        console.log(this.state)
-        console.log("STORE PROPS", this.props)
+                <Form.Field>
+                    <Form.Input onChange={this.handleChange} type='password' name="password" label='Password' placeholder='Password'/>
+                </Form.Field>
 
-        return (
-
-
-
-            <Container>
-                <Grid className="centered">
-                    <Form size="large" onSubmit={this.handleSubmit}>
-                        <Form.Field>
-                            <Form.Input onChange={this.handleChange} name="username" label='Username' placeholder='Username'/>
-                        </Form.Field>
-
-                        <Form.Field>
-                            <Form.Input onChange={this.handleChange} name="password" label='Password' placeholder='Password'/>
-                        </Form.Field>
-
-                        <Button type='submit'>Submit</Button>
-                    </Form>
-                </Grid>
-            </Container>
+                <Button type='submit'>Submit</Button>
+            </Form>
+            </div>
         )
     }
 
