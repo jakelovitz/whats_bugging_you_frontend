@@ -11,11 +11,11 @@ import { connect } from 'react-redux'
 class App extends Component {
 
   componentDidMount() {
-    const userID = localStorage.getItem("user_id")
-    if(userID) {
+    const token = localStorage.getItem("token")
+    if(token) {
       fetch("http://localhost:3000/auto_login", {
         headers: {
-          "Authorization": userID
+          "Authorization": token
         }
       })
       .then(res => res.json())
@@ -32,34 +32,30 @@ class App extends Component {
 
 
   render() {
-    // console.log(this.props.currentUser)
+
+    // if (this.props.currentUser) {
+    //   return <Redirect to
+    // }
+
     return (
     
       <React.Fragment>
       <Grid>
         <Grid.Row centered>
             <Switch>
-                {/* <Route exact path="/users/:id" component={} /> */}
 
+                <Route path="/main" component={MainContainer} />
+                <Route path="/login" component={LogInSignUp} />
+{/* 
                 {this.props.currentUser ?
-                
-                // <Route exact path="/main" render={(routerProps) => {
-                //   return <Complaint {...routerProps}/>
-                // }} />
 
-                <MainContainer />
+                <Route path="/main" component={MainContainer} />
 
                 :
 
-                <LogInSignUp />
+                <Route path="/login" component={LogInSignUp} />
 
-                }
-
-                {/* <LogInSignUp></LogInSignUp> */}
-  
-                {/* <Route exact path="/main" render={(routerProps) => {
-                  return <Complaint {...routerProps}/>
-                }} /> */}
+                } */}
 
 
             </Switch>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../navbar/navbar'
-import Complaint from './complaint_component'
+// import Complaint from './complaint_component'
 import { Grid } from 'semantic-ui-react'
 import withAuth from '../withAuth'
 import NewComplaintForm from './new_complaint_form'

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 //still need to import whatever I need to get Redux working
 
 class Login extends Component {
@@ -31,17 +32,17 @@ class Login extends Component {
                 alert(response.errors)
             } else {
                 console.log("THIS GUY JUST LOGGED IN", response)
-                this.props.logInUser(response)
-                localStorage.setItem("user_id", response.id)
+                localStorage.setItem("token", response.token)
+                this.props.logInUser(response.user)
                 console.log("POST-SIGNIN PROPS", this.props.currentUser)
-                //REDIRECT
             }
         })
     }
 
     render() {
-        // console.log(this.state)
-        // console.log("STORE PROPS", this.props)
+        if (localStorage.getItem("token")) {
+            return <Redirect to="/main" />
+        }
         return (   
             <div>
             <h1>Log In!</h1>         
