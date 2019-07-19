@@ -5,6 +5,7 @@ const defaultState = {
 }
 
 function reducer(prevState = defaultState, action) {
+    // console.log(defaultState)
     switch(action.type) {
         case "LOG_IN":
             return {...prevState, currentUser: action.payload}

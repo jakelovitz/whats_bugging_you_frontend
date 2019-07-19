@@ -30,9 +30,9 @@ class Login extends Component {
             if (response.errors) {
                 alert(response.errors)
             } else {
-                //REDUX
+                console.log("THIS GUY JUST LOGGED IN", response)
                 this.props.logInUser(response)
-                localStorage.setItem("user_id", response.user.id)
+                localStorage.setItem("user_id", response.id)
                 console.log("POST-SIGNIN PROPS", this.props.currentUser)
                 //REDIRECT
             }
@@ -67,6 +67,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
+    console.log('hitting the dispatch in login_form')
     return {
         logInUser: (user) => {
             dispatch({type: "LOG_IN", payload: user})

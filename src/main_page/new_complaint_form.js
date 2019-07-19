@@ -19,23 +19,37 @@ class NewComplaintForm extends Component {
         userId: this.props.id,
         complaintTypeId: 0,
         complaintText: null,
-        complaintSeverity: null,
-        rerender: false
+        complaintSeverity: null
     }
     
     handleRadio = (e, { value }) => this.setState({ complaintTypeId: value })
 
-    checkForComplaintTypeAddition = () => {
-        mapStateToProps()
+    handleSeverity = (_e, { value }) => this.setState({ complaintSeverity: value })
+
+    handleChange = (event) => {
+        this.setState({
+            complaintText: event.target.value
+        })
     }
 
-    rerender = () => {
-
+    handleSubmit = () => {
+        // debugger
+        fetch("http://localhost:3000/complaints", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json",
+            },
+            body: JSON.stringify(this.state)
+        })
+        .then(res => res.json())
+        .then(response => {
+            console.log("reminder to dispatch this to the store")
+         })
     }
+        
 
     render() {
-        // console.log('do you rerender?')
-        // console.log('UPDATED PROPS', this.props)
         // console.log(this.props)
         // console.log(this.state)
         return(
@@ -54,13 +68,21 @@ class NewComplaintForm extends Component {
                 <Grid.Row>
                     <Grid.Column>
                         <Form>
-                            <Form.TextArea placeholder="Tell us what's bugging you here" />
-                            <Form.Select fluid label='Severity' options={options} />
+                            <Form.TextArea onChange={this.handleChange} placeholder="Tell us what's bugging you here" />
+                            <Form.Select 
+                                fluid label='Severity' 
+                                options={options} 
+                                placeholder='Select Severity'
+                                selection
+                                value={options.value}
+                                onChange={this.handleSeverity}
+                            />
                         </Form>
                     </Grid.Column>
 
                     <Grid.Column>
-                        {this.props.complaint_types.map(function(complaintType) {
+                        {console.log(this.props)}
+                        {this.props.complaint_types.map(function(complaintType) { //sometimes needs to be this.props.user.complaints, this is probably because of some confusion with REDUX v. React states and who current user is. Check this thoroughly tomorrow morning
                             return <Form.Radio 
                                 label={complaintType.name} 
                                 name='complaintTypeGroup'
@@ -76,6 +98,7 @@ class NewComplaintForm extends Component {
 
                 </Grid.Row>
             </Grid>
+            <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
             </Container>
         )
     }
