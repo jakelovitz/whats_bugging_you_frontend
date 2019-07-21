@@ -44,14 +44,13 @@ class NewComplaintForm extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log("reminder to dispatch this to the store")
+            console.log(response)
+            this.props.addComplaintToUser(response)
          })
     }
         
 
     render() {
-        // console.log(this.props)
-        // console.log(this.state)
         return(
             <Container>
             <Grid columns={2} stackable >
@@ -81,7 +80,7 @@ class NewComplaintForm extends Component {
                     </Grid.Column>
 
                     <Grid.Column>
-                        {console.log(this.props)}
+                        {/* {console.log(this.props)} */}
                         {this.props.complaint_types.map(function(complaintType) { //sometimes needs to be this.props.user.complaints, this is probably because of some confusion with REDUX v. React states and who current user is. Check this thoroughly tomorrow morning
                             return <Form.Radio 
                                 label={complaintType.name} 
@@ -111,7 +110,9 @@ function mapStateToProps(state) {
   
 function mapDispatchToProps(dispatch){
     return {
-        
+        addComplaintToUser: (complaint) => {
+            dispatch({type: "ADD_COMPLAINT", payload: complaint})
+        }
     }
 }
 

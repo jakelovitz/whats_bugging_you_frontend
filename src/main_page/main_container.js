@@ -15,7 +15,7 @@ class MainContainer extends Component {
                 <Grid>
                     <Grid.Row centered={true}><ComplaintContainer/></Grid.Row>
                     
-                    <NewComplaintForm />
+                    <Grid.Row centered={true}><NewComplaintForm /></Grid.Row>
                 </Grid>
             </React.Fragment>
         )

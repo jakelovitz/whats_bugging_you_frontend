@@ -30,15 +30,8 @@ class App extends Component {
     }
   }
 
-
   render() {
-
-    // if (this.props.currentUser) {
-    //   return <Redirect to
-    // }
-
     return (
-    
       <React.Fragment>
       <Grid>
         <Grid.Row centered>
@@ -46,25 +39,12 @@ class App extends Component {
 
                 <Route path="/main" component={MainContainer} />
                 <Route path="/login" component={LogInSignUp} />
-{/* 
-                {this.props.currentUser ?
-
-                <Route path="/main" component={MainContainer} />
-
-                :
-
-                <Route path="/login" component={LogInSignUp} />
-
-                } */}
-
 
             </Switch>
         </Grid.Row>
       </Grid>
-      </React.Fragment>
-          
+      </React.Fragment>   
     );
-
   }
 }
 
@@ -74,9 +54,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   return {
-      autoLogInUser: (user) => {
-          dispatch({type: "AUTO_LOG_IN", payload: user})
-      }
+    autoLogInUser: (user) => {
+        dispatch({type: "AUTO_LOG_IN", payload: user})
+    }
   }
 }
 
