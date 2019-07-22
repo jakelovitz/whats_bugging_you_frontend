@@ -45,7 +45,7 @@ class NewComplaintForm extends Component {
         .then(res => res.json())
         .then(response => {
             console.log(response)
-            this.props.addComplaintToUser(response)
+            this.props.addComplaint(response)
          })
     }
         
@@ -110,7 +110,7 @@ function mapStateToProps(state) {
   
 function mapDispatchToProps(dispatch){
     return {
-        addComplaintToUser: (complaint) => {
+        addComplaint: (complaint) => {
             dispatch({type: "ADD_COMPLAINT", payload: complaint})
         }
     }
