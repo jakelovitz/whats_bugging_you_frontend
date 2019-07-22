@@ -24,14 +24,14 @@ class Complaint extends Component {
     }
 
     render() {
-
+        // console.log(this.state.complaintType)
         const reactionToggle = this.state.reactionToggle
         let reactionForm;
 
         if (reactionToggle) {
             reactionForm = < NewReaction complaint={this.props.complaint}/>
         }
-        // console.log(this.state.complaintType)
+        console.log(this.state.complaintType)
         if (this.state.complaintType === null) {
             return (
                 "loading"

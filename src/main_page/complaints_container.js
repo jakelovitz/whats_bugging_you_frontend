@@ -26,21 +26,22 @@ class ComplaintContainer extends Component {
          })
     }
 
+    // filterUnreactedComplaint = () => {
+    //   if (complaint.reactions === undefined || complaint.reactions.length === 0) {
+    // }
+
     // handleReactionClick = (event) => {
     //   this.locateComplaint()
     // }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
 
         const UnreactedComplaints = () => (
 
-          //we need to add a check if this.state.user_complaints is null, if so, we want to render a loader
-
           <Grid columns={3} >
           {this.state.user_complaints.map((complaint) => {
-            if (complaint.reactions === null) {
-
+            if (complaint.reactions === undefined || complaint.reactions.length === 0) {
              return <Grid.Row key={complaint.id} width={5}>
                   <ComplaintComponent complaint={complaint} key={complaint.id} handleReactionClick={this.handleReactionClick} />
               </Grid.Row>
@@ -50,31 +51,23 @@ class ComplaintContainer extends Component {
           </ Grid>
         )
 
+        if (this.state.user_complaints === null) {
+            return (
+              "loading"
+            )
+        } else {
+          return (
+            
+            <React.Fragment>
+              <Container >
+                <h1>These bugs are waiting for a reaction!</h1>
+                    < UnreactedComplaints />
+              </Container>
+            </React.Fragment>
 
-        const ComplaintList = () => (
-            <Grid columns={3} >
-              {this.props.complaints.map((complaint) => (
-  
-                <Grid.Row key={complaint.id} width={5}>
-                  <ComplaintComponent complaint={complaint} key={complaint.id} handleReactionClick={this.handleReactionClick} />
-                </Grid.Row>
-                
-              ))}
-            </Grid>
-        );
-
-        return (
-           
-          <React.Fragment>
-            <Container >
-              <h1>These bugs are waiting for a reaction!</h1>
-                  < UnreactedComplaints />
-            </Container>
-           </React.Fragment>
-
-        )
+          )
     }
-}
+}}
 
 function mapStateToProps(state) {
     return state.currentUser
