@@ -1,7 +1,9 @@
 import update from 'immutability-helper';
 
 const defaultState = {
-    currentUser: null
+    currentUser: null,
+    userComplaints: null,
+    unreactedUserComplaints: []
 }
 
 function reducer(prevState = defaultState, action) {
@@ -15,6 +17,8 @@ function reducer(prevState = defaultState, action) {
             return update(prevState, {currentUser: {"complaint_types": {$push: [action.payload]}} })
         case "ADD_COMPLAINT":
             return update(prevState, {currentUser: {"complaints": {$push: [action.payload]}} })
+        case "ADD_USER_COMPLAINTS":
+            return {...prevState, userComplaints: action.payload.one, unreactedUserComplaints: action.payload.two}
         default:
             return prevState
     }

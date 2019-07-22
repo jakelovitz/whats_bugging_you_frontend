@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Grid, Card, Container, Item } from 'semantic-ui-react'
+import { Grid, Container } from 'semantic-ui-react'
 import ComplaintComponent from './complaint_component'
-import { arrayExpression } from '@babel/types';
 
 class ComplaintContainer extends Component {
 
-    state = {
-      user_complaints: null
-    }
-
     componentDidMount() {
-      // debugger
       fetch("http://localhost:3000/user_complaints", {
             method: "POST",
             headers: {
@@ -22,36 +16,39 @@ class ComplaintContainer extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            this.setState({ user_complaints: response})
+            this.props.addUserComplaints(response, this.filterUnreactedComplaints(response))
          })
     }
 
-    // filterUnreactedComplaint = () => {
-    //   if (complaint.reactions === undefined || complaint.reactions.length === 0) {
-    // }
+    filterUnreactedComplaints = (userComplaints) => {
+      let unreactedUserComplaints = []
+      userComplaints.map((complaint) => {
+        if (complaint.reactions === undefined || complaint.reactions.length === 0) {
+          unreactedUserComplaints.push(complaint)
+        }
+      })
+      return unreactedUserComplaints
+    }
 
     // handleReactionClick = (event) => {
     //   this.locateComplaint()
     // }
 
     render() {
-        // console.log(this.state)
+        console.log(this.props.unreactedUserComplaints)
 
         const UnreactedComplaints = () => (
 
           <Grid columns={3} >
-          {this.state.user_complaints.map((complaint) => {
-            if (complaint.reactions === undefined || complaint.reactions.length === 0) {
+          {this.props.unreactedUserComplaints.map((complaint) => {
              return <Grid.Row key={complaint.id} width={5}>
                   <ComplaintComponent complaint={complaint} key={complaint.id} handleReactionClick={this.handleReactionClick} />
               </Grid.Row>
-
-            }
           })}
           </ Grid>
         )
 
-        if (this.state.user_complaints === null) {
+        if (this.props === null) {
             return (
               "loading"
             )
@@ -70,12 +67,20 @@ class ComplaintContainer extends Component {
 }}
 
 function mapStateToProps(state) {
-    return state.currentUser
+    return {
+      userComplaints: state.userComplaints,
+      unreactedUserComplaints: state.unreactedUserComplaints
+  }
 }
   
 function mapDispatchToProps(dispatch){
     return {
-        
+      addUserComplaints: (userComplaints, unreactedUserComplaints) => {
+        dispatch({type: "ADD_USER_COMPLAINTS", payload: {
+          one: userComplaints,
+          two: unreactedUserComplaints
+        }})
+      }
     }
 }
 
