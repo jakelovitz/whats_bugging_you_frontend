@@ -11,7 +11,7 @@ class Complaint extends Component {
     }
 
     setComplaintType = () => {
-        return this.props.complaint_types.filter(ct => ct.id === this.props.complaint.complaint_type_id)
+        return this.props.currentUser.complaint_types.filter(ct => ct.id === this.props.complaint.complaint_type_id)
     }
 
     componentDidMount() {
@@ -23,15 +23,29 @@ class Complaint extends Component {
         this.setState({ reactionToggle: !this.state.reactionToggle})
     }
 
+    handleDelete = (id) => {
+        fetch(`http://localhost:3000/complaints/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(this.props.complaint)
+        })
+        .then(res => res.json())
+        .then(response => this.props.removeUnreactedComplaint(this.locateIndex()))
+    }
+
+    locateIndex = () => {
+        return (this.props.unreactedUserComplaints.indexOf(this.props.complaint))
+    }
+
     render() {
-        // console.log(this.state.complaintType)
         const reactionToggle = this.state.reactionToggle
         let reactionForm;
 
         if (reactionToggle) {
             reactionForm = < NewReaction complaint={this.props.complaint}/>
         }
-        // console.log(this.state.complaintType)
         if (this.state.complaintType === null) {
             return (
                 "loading"
@@ -39,31 +53,34 @@ class Complaint extends Component {
         } else {
             return( 
                 <React.Fragment>
-                <Card fluid color="red">
+                <Card fluid color={this.state.complaintType.color}>
                     <Card.Content header={this.state.complaintType.name} />
                     <Card.Content description={this.props.complaint.complaint_text} />
                     <Card.Content >
-                        <Button onClick={this.toggleReactionForm}>React</Button>
-                        <Button>Edit</Button>
-                        <Button>Delete</Button>
+                        <Button onClick={this.toggleReactionForm} color={this.state.complaintType.color}>React</Button>
+                        <Button color={this.state.complaintType.color}>Edit</Button>
+                        <Button onClick={() => this.handleDelete(this.props.complaint.id)}color={this.state.complaintType.color}>Delete</Button>
                     </Card.Content>
                 </Card>
                 {reactionForm}
                 </React.Fragment>
-              
             )
         }
     }
 }
 
 function mapStateToProps(state) {
-    // console.log(state)
-    return state.currentUser
+    return {
+        currentUser: state.currentUser,
+        unreactedUserComplaints: state.unreactedUserComplaints
+    }
 }
   
 function mapDispatchToProps(dispatch){
     return {
-        
+        removeUnreactedComplaint: (complaint_id) => {
+            dispatch({type: "REMOVE_UNREACTED_COMPLAINT", payload: complaint_id})
+        }
     }
 }
 
