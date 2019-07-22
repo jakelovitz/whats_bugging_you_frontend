@@ -18,8 +18,8 @@ class NewComplaintForm extends Component {
     state = {
         userId: this.props.id,
         complaintTypeId: 0,
-        complaintText: null,
-        complaintSeverity: null
+        complaintText: "",
+        complaintSeverity: ""
     }
     
     handleRadio = (e, { value }) => this.setState({ complaintTypeId: value })
@@ -47,6 +47,7 @@ class NewComplaintForm extends Component {
             console.log(response)
             this.props.addComplaint(response)
          })
+        .then(response => this.setState({ complaintText: "", complaintSeverity: ""}))
     }
         
 
@@ -67,13 +68,13 @@ class NewComplaintForm extends Component {
                 <Grid.Row>
                     <Grid.Column>
                         <Form>
-                            <Form.TextArea onChange={this.handleChange} placeholder="Tell us what's bugging you here" />
+                            <Form.TextArea onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
                             <Form.Select 
                                 fluid label='Severity' 
                                 options={options} 
                                 placeholder='Select Severity'
                                 selection
-                                value={options.value}
+                                value={this.state.complaintSeverity}
                                 onChange={this.handleSeverity}
                             />
                         </Form>
@@ -81,7 +82,7 @@ class NewComplaintForm extends Component {
 
                     <Grid.Column>
                         {/* {console.log(this.props)} */}
-                        {this.props.complaint_types.map(function(complaintType) { //sometimes needs to be this.props.user.complaints, this is probably because of some confusion with REDUX v. React states and who current user is. Check this thoroughly tomorrow morning
+                        {this.props.complaint_types.map(function(complaintType) {
                             return <Form.Radio 
                                 label={complaintType.name} 
                                 name='complaintTypeGroup'

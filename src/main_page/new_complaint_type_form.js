@@ -23,8 +23,8 @@ class NewComplaintTypeForm extends Component {
 
     state = {
         userId: this.props.id,
-        complaintType: null,
-        complaintColor: null
+        complaintType: "",
+        complaintColor: ""
     }
 
     handleChange = (event) => { this.setState({ complaintType: event.target.value }) }
@@ -44,16 +44,16 @@ class NewComplaintTypeForm extends Component {
         })
         .then(res => res.json())
         .then(response => this.props.addComplaintTypeToUser(response))
+        .then(response => this.setState({ complaintType: "", complaintColor: ""}))
     }
 
     render() {
-        // console.log(this.props)
+        console.log(this.state)
         return (
             <React.Fragment>
             <h2>Add a new Bug type!</h2>
             <Form onSubmit={(event) => this.handleSubmit(event)}>
-                <Form.Field onChange={this.handleChange}>
-                    {/* <label>Complaint Type</label> */}
+                <Form.Field onChange={this.handleChange} value={this.state.complaintType}>
                     <input placeholder='Bug Type' />
                 </Form.Field>
                 <Form.Select 
@@ -61,7 +61,7 @@ class NewComplaintTypeForm extends Component {
                     placeholder='Select a color'
                     options={options}
                     selection
-                    value={options.value}
+                    value={this.state.complaintColor}
                     style={{color: options.color}}
                     onChange={this.handleDropdown}
                 />

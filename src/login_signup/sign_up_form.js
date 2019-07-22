@@ -27,6 +27,7 @@ class Signup extends Component {
         })
         .then(res => res.json())
         .then(data => alert("You're ready to sign in!"))
+        // .then(data => this.setState({ username: "", password: "", confirmPassword: "", phone_number: ""}))
     }
 
     handleSubmit = (event) => {
@@ -45,19 +46,19 @@ class Signup extends Component {
             <h1>Sign up!</h1>
             <Form size="large" onSubmit={(event) => this.handleSubmit(event)}>
                 <Form.Field>
-                    <Form.Input onChange={this.handleChange} name='username' label='Username' placeholder='Username'/>
+                    <Form.Input onChange={this.handleChange} name='username' label='Username' placeholder='Username' value={this.state.value}/>
                 </Form.Field>
 
                 <Form.Field>
-                    <Form.Input onChange={this.handleChange} type='password' name='password' label='Password' placeholder='Password'/>
+                    <Form.Input onChange={this.handleChange} type='password' name='password' label='Password' placeholder='Password' value={this.state.value}/>
                 </Form.Field>
 
                 <Form.Field>
-                    <Form.Input onChange={this.handleChange} type='password' name='confirmPassword' label='Confirm Password' placeholder='Re-enter Password'/>
+                    <Form.Input onChange={this.handleChange} type='password' name='confirmPassword' label='Confirm Password' placeholder='Re-enter Password' value={this.state.value}/>
                 </Form.Field>
 
                 <Form.Field>
-                    <Form.Input onChange={this.handleChange} name='phone_number' label='10-Digit Phone Number' placeholder='e.g. 555-555-5555' type='phone number'/>
+                    <Form.Input onChange={this.handleChange} name='phone_number' label='10-Digit Phone Number' placeholder='e.g. 555-555-5555' type='phone number' value={this.state.value}/>
                 </Form.Field>
 
                 <Button type='submit'>Submit</Button>

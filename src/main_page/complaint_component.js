@@ -46,7 +46,7 @@ class Complaint extends Component {
         if (reactionToggle) {
             reactionForm = < NewReaction complaint={this.props.complaint}/>
         }
-        if (this.state.complaintType === null) {
+        if (this.state.complaintType === undefined || this.state.complaintType === null) {
             return (
                 "loading"
             )

@@ -12,7 +12,7 @@ class ComplaintContainer extends Component {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
             },
-            body: JSON.stringify({"user_id": this.props.id})
+            body: JSON.stringify({"user_id": this.props.currentUser.id})
         })
         .then(res => res.json())
         .then(response => {
@@ -68,6 +68,7 @@ class ComplaintContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+      currentUser: state.currentUser,
       userComplaints: state.userComplaints,
       unreactedUserComplaints: state.unreactedUserComplaints
   }
