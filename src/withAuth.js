@@ -7,10 +7,7 @@ import { Dimmer, Segment, Loader } from 'semantic-ui-react'
 function withAuth(MyComponent){
   class AuthComponent extends React.Component{
     render(){
-
-      // check if there is a user in state
       if (this.props.currentUser){
-        
         return(
           <MyComponent {...this.props}/>
         )
@@ -27,7 +24,6 @@ function withAuth(MyComponent){
           )
         }
       }
-      
     }
   }
 

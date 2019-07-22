@@ -79,7 +79,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
     return {
         addComplaintTypeToUser: (complaintType) => {
-            // console.log("hey dana")
             dispatch({type: "ADD_COMPLAINT_TYPE", payload: complaintType})
         }
     }
