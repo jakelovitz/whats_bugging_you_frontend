@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Grid, Container } from 'semantic-ui-react'
+import { Grid, Container, Loader, Dimmer, Segment } from 'semantic-ui-react'
 import ComplaintComponent from './complaint_component'
 
 class ComplaintContainer extends Component {
@@ -30,10 +30,6 @@ class ComplaintContainer extends Component {
       return unreactedUserComplaints
     }
 
-    // handleReactionClick = (event) => {
-    //   this.locateComplaint()
-    // }
-
     render() {
         console.log(this.props.unreactedUserComplaints)
 
@@ -50,7 +46,11 @@ class ComplaintContainer extends Component {
 
         if (this.props === null) {
             return (
-              "loading"
+              <Segment>
+                <Dimmer active>
+                  <Loader />
+                </Dimmer>
+              </Segment>
             )
         } else {
           return (

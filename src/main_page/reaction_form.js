@@ -16,7 +16,7 @@ class NewReaction extends Component {
     state = {
         reactionToggle: false,
         complaintId: this.props.complaint.id,
-        userId: this.props.id,
+        userId: this.props.currentUser.id,
         reactionText: null,
         reactionSeverity: 0
     }
@@ -43,11 +43,16 @@ class NewReaction extends Component {
         .then(res => res.json())
         .then(response => {
             console.log(response)
+            this.props.addResponse(this.locateIndex())
          })
     }
 
+    locateIndex = () => {
+        return (this.props.unreactedUserComplaints.indexOf(this.props.complaint))
+    }
+
     render() {
-        console.log(this.state)
+        console.log(this.props)
         return(
             <Container>
                 <Form>
@@ -68,12 +73,17 @@ class NewReaction extends Component {
 }
 
 function mapStateToProps(state) {
-    return state.currentUser
+    return {
+        currentUser: state.currentUser,
+        unreactedUserComplaints: state.unreactedUserComplaints
+    }
 }
   
 function mapDispatchToProps(dispatch){
     return {
-        
+        addResponse: (response) => {
+            dispatch({type: "ADD_RESPONSE", payload: response})
+        }
     }
 }
 

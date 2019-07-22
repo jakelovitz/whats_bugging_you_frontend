@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Card, Button, Grid } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 import NewReaction from './reaction_form'
 
 class Complaint extends Component {
