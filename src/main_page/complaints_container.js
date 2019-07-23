@@ -33,17 +33,6 @@ class ComplaintContainer extends Component {
     render() {
         console.log(this.props.unreactedUserComplaints)
 
-        const UnreactedComplaints = () => (
-
-          <Grid columns={3} >
-          {this.props.unreactedUserComplaints.map((complaint) => {
-             return <Grid.Row key={complaint.id} width={5}>
-                  <ComplaintComponent complaint={complaint} key={complaint.id} handleReactionClick={this.handleReactionClick} />
-              </Grid.Row>
-          })}
-          </ Grid>
-        )
-
         if (this.props === null) {
             return (
               <Segment>
@@ -58,7 +47,11 @@ class ComplaintContainer extends Component {
             <React.Fragment>
               <Container >
                 <h1>These bugs are waiting for a reaction!</h1>
-                    < UnreactedComplaints />
+                <Grid columns={3} >
+                  {this.props.unreactedUserComplaints.map((complaint) => {
+                    return <ComplaintComponent key={complaint.id} complaint={complaint} handleReactionClick={this.handleReactionClick} />
+                  })}
+                </ Grid>
               </Container>
             </React.Fragment>
 

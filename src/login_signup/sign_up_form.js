@@ -61,7 +61,9 @@ class Signup extends Component {
                     <Form.Input onChange={this.handleChange} name='phone_number' label='10-Digit Phone Number' placeholder='e.g. 555-555-5555' type='phone number' value={this.state.value}/>
                 </Form.Field>
 
-                <Button type='submit'>Submit</Button>
+                <Button type='submit'
+                    disabled={!this.state.username || !this.state.password || !this.state.confirmPassword || !this.state.phone_number}
+                >Submit</Button>
             </Form>
             </div>
         )

@@ -17,7 +17,7 @@ class NewComplaintForm extends Component {
     
     state = {
         userId: this.props.id,
-        complaintTypeId: 0,
+        complaintTypeId: null,
         complaintText: "",
         complaintSeverity: ""
     }
@@ -61,7 +61,7 @@ class NewComplaintForm extends Component {
                     </Grid.Column>
 
                     <Grid.Column>
-                        <h2>Your Complaint Types</h2>
+                        <h2>Your Bug Types</h2>
                     </Grid.Column>
                 </Grid.Row>
 
@@ -98,7 +98,11 @@ class NewComplaintForm extends Component {
 
                 </Grid.Row>
             </Grid>
-            <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
+            <Button 
+                type='submit' 
+                onClick={this.handleSubmit}
+                disabled={!this.state.complaintTypeId || !this.state.complaintSeverity || !this.state.complaintText}
+                >Submit</Button>
             </Container>
         )
     }

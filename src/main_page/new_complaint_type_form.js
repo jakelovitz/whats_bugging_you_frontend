@@ -48,13 +48,13 @@ class NewComplaintTypeForm extends Component {
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return (
             <React.Fragment>
             <h2>Add a new Bug type!</h2>
             <Form onSubmit={(event) => this.handleSubmit(event)}>
-                <Form.Field onChange={this.handleChange} value={this.state.complaintType}>
-                    <input placeholder='Bug Type' />
+                <Form.Field >
+                    <input placeholder='Bug Type' onChange={this.handleChange} value={this.state.complaintType}/>
                 </Form.Field>
                 <Form.Select 
                     fluid label='Color'
@@ -65,7 +65,7 @@ class NewComplaintTypeForm extends Component {
                     style={{color: options.color}}
                     onChange={this.handleDropdown}
                 />
-                <Button type='submit'>Add Bug Type!</Button>
+                <Button type='submit' disabled={!this.state.complaintType || !this.state.complaintColor}>Add Bug Type!</Button>
             </Form>
             </React.Fragment>
         )
