@@ -42,7 +42,7 @@ class NewReaction extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log(response)
+            // console.log(response)
             this.props.addResponse(this.locateIndex())
          })
     }
@@ -52,7 +52,7 @@ class NewReaction extends Component {
     }
 
     render() {
-        console.log(this.props)
+        // console.log("does this go twice?")
         return(
             <Container>
                 <Form>
