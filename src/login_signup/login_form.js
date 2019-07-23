@@ -31,7 +31,7 @@ class Login extends Component {
             if (response.errors) {
                 alert(response.errors)
             } else {
-                console.log("THIS GUY JUST LOGGED IN", response.user)
+                // console.log("THIS GUY JUST LOGGED IN", response.user)
                 localStorage.setItem("token", response.token)
                 this.props.logInUser(response.user)
             }
@@ -39,7 +39,7 @@ class Login extends Component {
     }
 
     render() {
-        console.log("LOGIN SCREEN PROPS", this.props)
+        // console.log("LOGIN SCREEN PROPS", this.props)
         if (localStorage.getItem("token")) {
             return <Redirect to="/main" />
         }
