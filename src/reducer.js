@@ -26,6 +26,8 @@ function reducer(prevState = defaultState, action) {
             return defaultState;
         case "UPDATED_EDITED_COMPLAINT":
             return update(prevState, { unreactedUserComplaints: { [action.index]: {$set: action.payload} } })
+        case "UPDATE_USER_SETTINGS":
+            return {...prevState, currentUser: action.payload}
         default:
             return prevState
     }

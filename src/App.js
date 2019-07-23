@@ -6,6 +6,7 @@ import { Grid } from 'semantic-ui-react'
 //only here for testing
 import MainContainer from './main_page/main_container'
 import { connect } from 'react-redux'
+import UserSettingsContainer from './user_settings/user_settings_container'
 
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
 
                 <Route path="/main" component={MainContainer} />
                 <Route path="/login" component={LogInSignUp} />
+                <Route path="/user" component={UserSettingsContainer} />
 
             </Switch>
         </Grid.Row>
