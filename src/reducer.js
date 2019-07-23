@@ -24,7 +24,7 @@ function reducer(prevState = defaultState, action) {
         case "REMOVE_UNREACTED_COMPLAINT":
             return update(prevState, { unreactedUserComplaints: { $splice: [[action.payload, 1]] } });
         case "LOG_USER_OUT":
-            return {currentUser: action.payload, userComplaints: action.payload, unreactedUserComplaints: action.payload};
+            return defaultState;
         case "UPDATED_EDITED_COMPLAINT":
             return update(prevState, { unreactedUserComplaints: { [action.index]: {$set: action.payload} } })
         default:

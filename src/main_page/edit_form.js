@@ -77,7 +77,6 @@ class EditForm extends Component {
     handleChange = (event) => { this.setState({ newComplaintText: event.target.value }) }
 
     render() {
-        console.log(this.state.currentComplaintType.color)
         return (
             <React.Fragment>
                 <Form onSubmit={(event) => this.handleSubmit(event, this.props.complaint.id)}>

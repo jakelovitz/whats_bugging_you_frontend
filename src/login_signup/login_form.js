@@ -31,15 +31,15 @@ class Login extends Component {
             if (response.errors) {
                 alert(response.errors)
             } else {
-                console.log("THIS GUY JUST LOGGED IN", response)
+                console.log("THIS GUY JUST LOGGED IN", response.user)
                 localStorage.setItem("token", response.token)
                 this.props.logInUser(response.user)
-                console.log("POST-SIGNIN PROPS", this.props.currentUser)
             }
         })
     }
 
     render() {
+        console.log("LOGIN SCREEN PROPS", this.props)
         if (localStorage.getItem("token")) {
             return <Redirect to="/main" />
         }
@@ -68,7 +68,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    console.log('hitting the dispatch in login_form')
+    // console.log("hitting the login dispatch")
     return {
         logInUser: (user) => {
             dispatch({type: "LOG_IN", payload: user})

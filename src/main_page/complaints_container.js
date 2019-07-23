@@ -6,6 +6,7 @@ import ComplaintComponent from './complaint_component'
 class ComplaintContainer extends Component {
 
     componentDidMount() {
+      // console.log("COMPLAINTS CONTAINER COMPONENT DID MOUNT", this.props)
       fetch("http://localhost:3000/user_complaints", {
             method: "POST",
             headers: {
@@ -15,6 +16,7 @@ class ComplaintContainer extends Component {
             body: JSON.stringify({"user_id": this.props.currentUser.id})
         })
         .then(res => res.json())
+        // .then(response => console.log("USER_COMPLAINTS FETCH RESPONSE", response))
         .then(response => {
             this.props.addUserComplaints(response, this.filterUnreactedComplaints(response))
          })
@@ -31,9 +33,10 @@ class ComplaintContainer extends Component {
     }
 
     render() {
-        console.log(this.props.unreactedUserComplaints)
+        console.log("USER COMPLAINTS", this.props.userComplaints)
+        console.log("UNREACTED USER COMPLAINTS",this.props.unreactedUserComplaints)
 
-        if (this.props === null) {
+        if (this.props.unreactedUserComplaints === null) {
             return (
               <Segment>
                 <Dimmer active>
