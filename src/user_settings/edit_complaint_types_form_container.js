@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Card } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import UpdateComplaintTypeForm from './complaint_type_form'
 

@@ -36,7 +36,7 @@ class ComplaintContainer extends Component {
     }
 
     render() {
-        console.log("USER COMPLAINTS", this.props.userComplaints)
+        // console.log("USER COMPLAINTS", this.props.userComplaints)
         // console.log("UNREACTED USER COMPLAINTS",this.props.unreactedUserComplaints)
 
         if (this.props.unreactedUserComplaints === null) {

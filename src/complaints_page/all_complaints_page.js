@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import ActualComplaint from './actual_complaint'
 
 class AllComplaintsPage extends Component {
@@ -12,15 +12,20 @@ class AllComplaintsPage extends Component {
     }
 
     render() {
-        console.log("USER COMPLAINTS", this.props.userComplaints)
+        // console.log("USER COMPLAINTS", this.props.userComplaints)
         return(
             <Grid centered={true} columns={6} >
-
-                {this.props.userComplaints.map(function(complaint) {
-
-                    return <Grid.Column key={complaint.id}>
-                        < ActualComplaint complaint={complaint} complaintType={this.setComplaintType(complaint)} />
-                    </Grid.Column>
+                
+                {this.props.userComplaints.map(function(complaint) { //add an IF statement to check for selected type and filter bugs according. - if ()
+                    if (this.props.selectedComplaintType === "showAll") {
+                        return <Grid.Column key={complaint.id}>
+                            < ActualComplaint complaint={complaint} complaintType={this.setComplaintType(complaint)} />
+                        </Grid.Column>
+                    } else if ((this.setComplaintType(complaint).name === this.props.selectedComplaintType)) {
+                        return <Grid.Column key={complaint.id}>
+                            < ActualComplaint complaint={complaint} complaintType={this.setComplaintType(complaint)} />
+                        </Grid.Column>
+                    }
 
                 }, this)}
             

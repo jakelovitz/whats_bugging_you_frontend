@@ -8,16 +8,21 @@ import AllComplaintsPage from './all_complaints_page'
 class ComplaintsPageContainer extends Component {
 
     state = {
-        //everything from all_complaints_page and filter_bar goes here
+        selectedComplaintType: "showAll"
+    }
+
+    setSelectedComplaintType = (complaintType) => {
+        this.setState({ selectedComplaintType: complaintType })
     }
 
     render() {
+        console.log(this.state)
         return(
             <React.Fragment>
             <Navbar />
             <Grid>
-                <Grid.Row><FilterBar /></Grid.Row>
-                <Grid.Row><AllComplaintsPage /></Grid.Row>
+                <Grid.Row><FilterBar setSelectedComplaintType={this.setSelectedComplaintType} /></Grid.Row>
+                <Grid.Row><AllComplaintsPage selectedComplaintType={this.state.selectedComplaintType} /></Grid.Row>
             </Grid>
         </React.Fragment>
         )

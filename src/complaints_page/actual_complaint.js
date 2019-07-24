@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 class ActualComplaint extends Component {
 
@@ -8,21 +8,26 @@ class ActualComplaint extends Component {
         complaintType: ""
     }
 
-
-    // setComplaintType = () => {
-    //     return this.props.currentUser.complaint_types.filter(ct => ct.id === this.props.complaint.complaint_type_id)
-    // }
-
-    // componentDidMount() {
-    //     let type = this.setComplaintType()
-    //     this.setState({ complaintType: type[0]})
-    // }
+    reactions = () => {
+        // console.log("the reactions function is being hit")
+        let returnValue
+        if (this.props.complaint.reactions.length !== 0) {
+            this.props.complaint.reactions.map((reaction) => {
+                returnValue = <Card.Content description={reaction.cooldown_thoughts+ ", Post-Reflection Severity: " + reaction.updated_severity}></Card.Content>
+            })
+        } else {
+            returnValue = <Card.Content description={"You haven't reacted to this bug yet!"}></Card.Content>
+        }
+        return returnValue
+    }
 
     render() {
+        // console.log(this.props)
         return(
-            <Card>
+            <Card color={this.props.complaintType.color}>
                 <Card.Content header={this.props.complaintType.name + ", Severity: " + this.props.complaint.severity} />
-                <Card.Content description={this.props.complaint.text} />
+                <Card.Content description={"Bug: " +  this.props.complaint.complaint_text} />
+                {this.reactions()}
             </Card>
         )
     }
