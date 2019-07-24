@@ -6,7 +6,7 @@ import ComplaintComponent from './complaint_component'
 class ComplaintContainer extends Component {
 
     componentDidMount() {
-      // console.log("COMPLAINTS CONTAINER COMPONENT DID MOUNT", this.props)
+      // console.log("COM PLAINTS CONTAINER COMPONENT DID MOUNT", this.props)
       fetch("http://localhost:3000/user_complaints", {
             method: "POST",
             headers: {
@@ -24,16 +24,19 @@ class ComplaintContainer extends Component {
 
     filterUnreactedComplaints = (userComplaints) => {
       let unreactedUserComplaints = []
-      userComplaints.map((complaint) => {
-        if (complaint.reactions === undefined || complaint.reactions.length === 0) {
-          unreactedUserComplaints.push(complaint)
-        }
-      })
+      
+        userComplaints.map((complaint) => {
+          if (complaint.reactions === undefined || complaint.reactions.length === 0) {
+            unreactedUserComplaints.push(complaint)
+          }
+        })
+
+
       return unreactedUserComplaints
     }
 
     render() {
-        // console.log("USER COMPLAINTS", this.props.userComplaints)
+        console.log("USER COMPLAINTS", this.props.userComplaints)
         // console.log("UNREACTED USER COMPLAINTS",this.props.unreactedUserComplaints)
 
         if (this.props.unreactedUserComplaints === null) {

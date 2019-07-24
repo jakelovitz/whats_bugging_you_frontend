@@ -30,15 +30,15 @@ class Navbar extends Component {
 
       <Menu widths={5}>
         <Container>
-          <Menu.Item header>
+          <Menu.Item header as={Link} to='/main'>
             What's Bugging You?
           </Menu.Item>
 
-          <Menu.Item position="right" name="Your Bugs" onClick={() => this.handleYourBugs()} />
+          <Menu.Item position="right" name="Your Bugs" as={Link} to='/your_bugs' onClick={() => this.handleYourBugs()} />
 
           <Menu.Item position="right" name="Bug Breakdown" onClick={() => this.handleBugBreakdown()} />
 
-          <Menu.Item position="right" name="User Settings" onClick={() => this.handleUserSettings()} />
+          <Menu.Item position="right" name="User Settings" as={Link} to='/user' onClick={() => this.handleUserSettings()} />
 
           <Menu.Item position="right" name="Logout" as={Link} to='/login' onClick={() => this.handleLogout()}  />
          
