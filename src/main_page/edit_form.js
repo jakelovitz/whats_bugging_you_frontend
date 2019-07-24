@@ -77,7 +77,6 @@ class EditForm extends Component {
     handleChange = (event) => { this.setState({ newComplaintText: event.target.value }) }
 
     render() {
-        console.log(this.state.currentComplaintType.color)
         return (
             <React.Fragment>
                 <Form onSubmit={(event) => this.handleSubmit(event, this.props.complaint.id)}>
@@ -107,8 +106,8 @@ class EditForm extends Component {
                         />
                     </Card.Content>
                     <Card.Content>
-                        <Button onClick={() => this.props.toggleEditForm()}>Don't Edit</Button>
-                        <Button>Submit</Button>
+                        <Button onClick={() => this.props.toggleEditForm()} color={this.state.currentComplaintType.color} >Don't Edit</Button>
+                        <Button disabled={!this.state.newComplaintType || !this.state.newComplaintSeverity || !this.state.newComplaintSeverity} color={this.state.currentComplaintType.color}>Submit</Button>
                     </Card.Content>
                 </Card>
                 </Form>

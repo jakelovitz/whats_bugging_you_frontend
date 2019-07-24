@@ -7,7 +7,6 @@ const defaultState = {
 }
 
 function reducer(prevState = defaultState, action) {
-    // console.log(defaultState)
     switch(action.type) {
         case "LOG_IN":
             return {...prevState, currentUser: action.payload}
@@ -24,9 +23,11 @@ function reducer(prevState = defaultState, action) {
         case "REMOVE_UNREACTED_COMPLAINT":
             return update(prevState, { unreactedUserComplaints: { $splice: [[action.payload, 1]] } });
         case "LOG_USER_OUT":
-            return {currentUser: action.payload, userComplaints: action.payload, unreactedUserComplaints: action.payload};
+            return defaultState;
         case "UPDATED_EDITED_COMPLAINT":
             return update(prevState, { unreactedUserComplaints: { [action.index]: {$set: action.payload} } })
+        case "UPDATE_USER_SETTINGS":
+            return {...prevState, currentUser: action.payload}
         default:
             return prevState
     }

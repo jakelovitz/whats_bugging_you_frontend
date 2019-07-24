@@ -26,8 +26,13 @@ class Signup extends Component {
             body: JSON.stringify(this.state)
         })
         .then(res => res.json())
-        .then(data => alert("You're ready to sign in!"))
-        // .then(data => this.setState({ username: "", password: "", confirmPassword: "", phone_number: ""}))
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            } else {
+                alert("You're ready to sign in!")
+            }
+        })
     }
 
     handleSubmit = (event) => {

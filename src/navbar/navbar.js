@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Menu, Container } from 'semantic-ui-react';
 
 
@@ -8,8 +8,7 @@ class Navbar extends Component {
 
   handleLogout = () => {
     localStorage.removeItem("token")
-    this.props.logUserOut(null, [], [])
-    return <Redirect to="/login" push/>
+    this.props.logUserOut()
   }
 
   render() {
@@ -17,23 +16,19 @@ class Navbar extends Component {
 
     return (
 
-      <Menu>
+      <Menu widths={5}>
         <Container>
-          <Menu.Item header>
+          <Menu.Item header as={Link} to='/main'>
             What's Bugging You?
           </Menu.Item>
 
-          <Menu.Item as="a" position="right" name="Bug Breakdown">
-            Bug Breakdown
-          </Menu.Item>
+          <Menu.Item position="right" name="Your Bugs" as={Link} to='/your_bugs' />
 
-          <Menu.Item as="a" position="right" name="User Settings">
-            User Settings
-          </Menu.Item>
+          <Menu.Item position="right" name="Bug Breakdown"  />
 
-          <Menu.Item as="a" position="right" name="Logout" onClick={() => this.handleLogout()}>
-            Logout
-          </Menu.Item>
+          <Menu.Item position="right" name="User Settings" as={Link} to='/user'  />
+
+          <Menu.Item position="right" name="Logout" as={Link} to='/login' onClick={() => this.handleLogout()}  />
          
         </Container>
       </Menu>
@@ -44,17 +39,13 @@ class Navbar extends Component {
 function mapStateToProps(state) {
   return {
     userComplaints: state.userComplaints
-}
+  }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    logUserOut: (currentUser, userComplaints, unreactedUserComplaints) => {
-      dispatch({type: "LOG_USER_OUT", payload: {
-        one: currentUser,
-        two: userComplaints,
-        three: unreactedUserComplaints
-      }})
+    logUserOut: () => {
+      dispatch({type: "LOG_USER_OUT"})
     }
   }
 }

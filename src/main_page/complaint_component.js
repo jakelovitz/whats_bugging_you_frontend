@@ -17,7 +17,6 @@ class Complaint extends Component {
     }
 
     componentDidMount() {
-        console.log("COMPLAINT COMPONENT MOUNTED")
         let type = this.setComplaintType()
         this.setState({ complaintType: type[0]})
     }
