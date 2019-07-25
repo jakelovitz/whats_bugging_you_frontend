@@ -15,7 +15,7 @@ function reducer(prevState = defaultState, action) {
         case "ADD_COMPLAINT_TYPE":
             return update(prevState, {currentUser: {"complaint_types": {$push: [action.payload]}} })
         case "ADD_COMPLAINT":
-            return update(prevState, {unreactedUserComplaints: {$push: [action.payload]}})
+            return update(prevState, {unreactedUserComplaints: {$push: [action.payload]}}, {userComplaints: {$push: [action.payload]}})
         case "ADD_USER_COMPLAINTS":
             return {...prevState, userComplaints: action.payload.one, unreactedUserComplaints: action.payload.two}
         case "ADD_RESPONSE":
@@ -28,6 +28,8 @@ function reducer(prevState = defaultState, action) {
             return update(prevState, { unreactedUserComplaints: { [action.index]: {$set: action.payload} } })
         case "UPDATE_USER_SETTINGS":
             return {...prevState, currentUser: action.payload}
+        case "ADD_ALL_USER_COMPLAINTS":
+            return {...prevState, userComplaints: action.payload}
         default:
             return prevState
     }
