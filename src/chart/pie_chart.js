@@ -48,6 +48,7 @@ class PieChart extends Component {
                     {
                         label: "Number of Bugs per Bug Type",
                         data: [reactionData[1], reactionData[0], reactionData[3], reactionData[2]],
+                        backgroundColor: ["#008000", "#FF0000", "#D2B48C", "#A9A9A9"]
                     }
                 ]
             },

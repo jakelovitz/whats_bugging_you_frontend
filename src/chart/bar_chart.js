@@ -57,6 +57,7 @@ class BarChart extends Component {
                     {
                         label: "Number of Bugs per Bug Type",
                         data: this.state.complaintNumbers,
+                        // backgroundColor: ["#008000", "#FF0000", "#D2B48C", "#A9A9A9"] write function to map over complaintTypes and return color
                     }
                 ]
             },
