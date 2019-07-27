@@ -30,6 +30,8 @@ function reducer(prevState = defaultState, action) {
             return {...prevState, currentUser: action.payload}
         case "ADD_ALL_USER_COMPLAINTS":
             return {...prevState, userComplaints: action.payload}
+        case "ADD_USER_COMPLAINTS_FROM_CHART_LOAD":
+            return {...prevState, userComplaints: action.payload}
         default:
             return prevState
     }

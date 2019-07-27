@@ -24,7 +24,7 @@ class Navbar extends Component {
 
           <Menu.Item position="right" name="Your Bugs" as={Link} to='/your_bugs' />
 
-          <Menu.Item position="right" name="Bug Breakdown"  />
+          <Menu.Item position="right" name="Bug Breakdown" as={Link} to='/bug_breakdown' />
 
           <Menu.Item position="right" name="User Settings" as={Link} to='/user'  />
 
