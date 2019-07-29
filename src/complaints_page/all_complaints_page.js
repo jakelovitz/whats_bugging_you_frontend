@@ -5,15 +5,17 @@ import styled from '@emotion/styled'
 import Flexbox from 'flexbox-react';
 
 const MyContainer = styled.div`
-  display: flex;
-  align-items: stretch;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin-right: 10%;
+  margin-left: 10%;
 `
 
 const MyBox = styled.div`
-  display: flex;
-  margin: auto;
+  align-self: stretch;
 `
 class AllComplaintsPage extends Component {
 

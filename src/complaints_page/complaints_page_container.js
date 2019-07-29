@@ -38,7 +38,7 @@ class ComplaintsPageContainer extends Component {
             <Navbar />
             <Grid>
                 <Grid.Row><FilterBar setSelectedComplaintType={this.setSelectedComplaintType} currentUser={this.props.currentUser} /></Grid.Row>
-                <Grid.Row><AllComplaintsPage selectedComplaintType={this.state.selectedComplaintType} currentUser={this.props.currentUser} userComplaints={this.props.userComplaints} /></Grid.Row>
+                <Grid.Row style={{justifyContent: "center"}}><AllComplaintsPage selectedComplaintType={this.state.selectedComplaintType} currentUser={this.props.currentUser} userComplaints={this.props.userComplaints} /></Grid.Row>
             </Grid>
         </React.Fragment>
         )

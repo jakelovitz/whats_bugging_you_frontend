@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react'
 import styled from '@emotion/styled'
 
 const Button = styled.button`
@@ -23,6 +22,8 @@ const MyContainer = styled.div`
   flex-flow: row;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-right: 5%;
+  margin-left: 5%;
 `
 
 const MyBox = styled.div`
