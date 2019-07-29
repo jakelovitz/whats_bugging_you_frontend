@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, Grid, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import NewComplaintTypeForm from './new_complaint_type_form'
+import Equalizer from 'react-equalizer'
 
 
 
@@ -50,7 +51,6 @@ class NewComplaintForm extends Component {
         .then(response => this.setState({ complaintText: "", complaintSeverity: ""}))
     }
         
-
     render() {
         return(
             <Container>
@@ -68,7 +68,7 @@ class NewComplaintForm extends Component {
                 <Grid.Row>
                     <Grid.Column>
                         <Form>
-                            <Form.TextArea onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
+                            <Form.TextArea ref="node1" onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
                             <Form.Select 
                                 fluid label='Severity' 
                                 options={options} 
@@ -83,7 +83,7 @@ class NewComplaintForm extends Component {
                     <Grid.Column>
                         {/* {console.log(this.props)} */}
                         {this.props.complaint_types.map(function(complaintType) {
-                            return <Form.Radio 
+                            return <Form.Radio ref="node2"
                                 label={complaintType.name} 
                                 name='complaintTypeGroup'
                                 value={complaintType.id}
@@ -95,7 +95,6 @@ class NewComplaintForm extends Component {
                         }, this)}
                         <NewComplaintTypeForm />
                     </Grid.Column>
-
                 </Grid.Row>
             </Grid>
             <Button 

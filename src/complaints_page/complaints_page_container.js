@@ -5,6 +5,7 @@ import withAuth from '../withAuth'
 import { Grid } from 'semantic-ui-react'
 import FilterBar from './filter_bar'
 import AllComplaintsPage from './all_complaints_page'
+import styled from '@emotion/styled'
 
 class ComplaintsPageContainer extends Component {
 
@@ -17,7 +18,6 @@ class ComplaintsPageContainer extends Component {
     }
 
     componentDidMount() {
-        // console.log("COM PLAINTS CONTAINER COMPONENT DID MOUNT", this.props)
         fetch("http://localhost:3000/user_complaints", {
               method: "POST",
               headers: {
@@ -27,20 +27,18 @@ class ComplaintsPageContainer extends Component {
               body: JSON.stringify({"user_id": this.props.currentUser.id})
           })
           .then(res => res.json())
-          // .then(response => console.log("USER_COMPLAINTS FETCH RESPONSE", response))
           .then(response => {
               this.props.addUserComplaints(response)
            })
       }
 
     render() {
-        // console.log(this.state)
         return(
             <React.Fragment>
             <Navbar />
             <Grid>
-                <Grid.Row><FilterBar setSelectedComplaintType={this.setSelectedComplaintType} /></Grid.Row>
-                <Grid.Row><AllComplaintsPage selectedComplaintType={this.state.selectedComplaintType} /></Grid.Row>
+                <Grid.Row><FilterBar setSelectedComplaintType={this.setSelectedComplaintType} currentUser={this.props.currentUser} /></Grid.Row>
+                <Grid.Row><AllComplaintsPage selectedComplaintType={this.state.selectedComplaintType} currentUser={this.props.currentUser} userComplaints={this.props.userComplaints} /></Grid.Row>
             </Grid>
         </React.Fragment>
         )
