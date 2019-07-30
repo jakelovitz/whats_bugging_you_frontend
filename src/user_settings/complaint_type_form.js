@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Card } from 'semantic-ui-react'
+import { Button, Form, Card, Modal } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 const options = [
@@ -23,7 +23,8 @@ class UpdateComplaintTypeForm extends Component {
     state = {
         userId: "",
         complaintTypeName: "",
-        complaintTypeColor: ""
+        complaintTypeColor: "",
+        isModalOpen: false
     }
 
     componentDidMount() {
@@ -52,14 +53,32 @@ class UpdateComplaintTypeForm extends Component {
             body: JSON.stringify(this.state)
         })
         .then(res => res.json())
-        // .then(response => console.log(response))
         .then(response => alert("Submitted!"))
-        // .then(response => this.props.setTypeAfterEdit())
-        // .then(response => this.props.toggleEditForm())
     }
 
+    handleDelete = (id) => { //this is currently just copied from complaint_component.js, it needs to be redone and handled correctly to delete ALL complaints associated with the complaint type
+        fetch(`http://localhost:3000/complaint_types/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(id)
+        })
+        .then(res => res.json())
+        .then(response => this.props.removeComplaintType(this.locateIndex()))//redux method goes here
+        .then(response => this.closeModal())
+    }
+
+    locateIndex = () => {
+        return (this.props.currentUser.complaint_types.indexOf(this.props.complaintType))
+    }
+    openModal = () => {this.setState({ isModalOpen: true })}
+
+    closeModal = () => {this.setState({ isModalOpen: false})}
+      
     render() {
         return (
+            <React.Fragment>
             <Form >
             <Card centered={true} color={this.state.complaintTypeColor}>
                 <Card.Content >
@@ -83,11 +102,25 @@ class UpdateComplaintTypeForm extends Component {
                     <Button.Group>
                         <Button type='submit' color={this.state.complaintTypeColor} onClick={(event) => this.handleSubmit(event, this.props.complaintType.id)}>Submit</Button>
                         <Button color={this.state.complaintTypeColor}>Disable</Button>
-                        <Button color={this.state.complaintTypeColor}>Delete</Button>
+                        <Button color={this.state.complaintTypeColor} id={this.props.complaintType.id} onClick={() => this.openModal()}>Delete</Button>
                     </Button.Group>
                 </Card.Content>
             </Card>
             </Form>
+            <Modal
+                key={this.props.complaintType.id}
+                open={this.state.isModalOpen}
+                header="Important!"
+                content="Deleting this Bug Type will delete ALL the bugs associated. Are you sure you want to proceed?"
+                actions={[
+                    <React.Fragment>
+                    <Button color="green" onClick={this.closeModal}>No</Button>
+                    <Button color="red" onClick={() => this.handleDelete(this.props.complaintType.id)}>Yes</Button>
+                    </React.Fragment>
+                ]}
+                onClose={this.handleClose}
+            />
+            </React.Fragment>
         )
     }
     
@@ -101,7 +134,9 @@ function mapStateToProps(state) {
   
 function mapDispatchToProps(dispatch){
     return {
-
+        removeComplaintType: (complaintTypeId) => {
+            dispatch({type: "REMOVE_COMPLAINT_TYPE", payload: complaintTypeId})
+        }
     }
 }
 
