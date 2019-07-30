@@ -41,23 +41,27 @@ class UpdateUserForm extends Component {
     }
 
     render() {
+        // console.log(this.state)
         return (
             <Grid centered={true}>
             <Grid.Row><h1>{`Hey ${this.props.currentUser.username}, update your settings here!`}</h1></Grid.Row>
             <Form onSubmit={(event => this.handleSubmit(event, this.props.currentUser.id))}>
-                <Grid.Row>
+                <Grid.Column>
                 <Form.Field >
                     <label>New Username</label>
                     <input defaultValue={this.state.newUsername} onChange={this.handleNewName}/>
                 </Form.Field>
+                </Grid.Column>
 
+                <Grid.Column>
                 <Form.Field >
                     <label>New Phone Number</label>
                     <input defaultValue={this.state.newPhoneNumber} onChange={this.handleNewNumber}/>
                 </Form.Field>
+                </Grid.Column>
 
-                <Button disabled={!this.state.newUsername || !this.state.newPhoneNumber}>Submit</Button>
-                </Grid.Row>
+                <Button style={{margin: "1%"}} disabled={!this.state.newUsername || !this.state.newPhoneNumber}>Submit</Button>
+                
             </Form>
             </Grid>
         )

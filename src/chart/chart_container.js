@@ -45,7 +45,7 @@ class ChartContainer extends Component {
 
                     <Grid.Row><ChartFilter setSelectedComplaintType={this.setSelectedComplaintType}/></Grid.Row>
 
-                    {(!!this.props.userComplaints.length) && ////alternative route: map through this.props.currentUser.complaint_types and create all pie charts from jump, and then selectively show one based on this.state.selectedComplaintType. Probably a switch statement?
+                    {(!!this.props.userComplaints.length) && 
                         <Grid.Row><PieChart complaintType={this.state.selectedComplaintType} /></Grid.Row>
                     }
 

@@ -50,7 +50,7 @@ class NewComplaintTypeForm extends Component {
     render() {
         // console.log(this.state)
         return (
-            <React.Fragment>
+            <div>
             <h2>Add a new Bug type!</h2>
             <Form onSubmit={(event) => this.handleSubmit(event)}>
                 <Form.Field >
@@ -67,7 +67,7 @@ class NewComplaintTypeForm extends Component {
                 />
                 <Button type='submit' disabled={!this.state.complaintType || !this.state.complaintColor}>Add Bug Type!</Button>
             </Form>
-            </React.Fragment>
+            </div>
         )
     }
 }

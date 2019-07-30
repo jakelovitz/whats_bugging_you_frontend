@@ -62,18 +62,7 @@ class BarChart extends Component {
                 ]
             },
             options: {
-                // scales: {
-                //     xAxes: [{
-                //         barPercentage: 1,
-                //         categoryPercentage: 1,
-                //         // barThickness: 'flex',
-                //         maxBarThickness: 8,
-                //         minBarLength: 2,
-                //         gridLines: {
-                //             offsetGridLines: true
-                //         }
-                //     }]
-                // }
+                responsive: false
             }
         })
     }
@@ -84,7 +73,7 @@ class BarChart extends Component {
 
             <div>
                 {this.props.userComplaints &&
-                <canvas //having a stylings sheet for the div here to style, per Brockhoff
+                <canvas style={{width: "100%"}}//having a stylings sheet for the div here to style, per Brockhoff
                     id="myChart"
                     ref={this.chartRef}
                 />

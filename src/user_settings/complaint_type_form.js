@@ -53,15 +53,14 @@ class UpdateComplaintTypeForm extends Component {
         })
         .then(res => res.json())
         // .then(response => console.log(response))
-        .then(response => console.log(response))
+        .then(response => alert("Submitted!"))
         // .then(response => this.props.setTypeAfterEdit())
         // .then(response => this.props.toggleEditForm())
     }
 
     render() {
-        console.log(this.state)
         return (
-            <Form onSubmit={(event) => this.handleSubmit(event, this.props.complaintType.id)}>
+            <Form >
             <Card centered={true} color={this.state.complaintTypeColor}>
                 <Card.Content >
                     <Form.Field>
@@ -81,9 +80,11 @@ class UpdateComplaintTypeForm extends Component {
                 </Card.Content>
 
                 <Card.Content>
-                    <Button color={this.state.complaintTypeColor}>Submit</Button>
-                    <Button color={this.state.complaintTypeColor}>Disable</Button>
-                    <Button color={this.state.complaintTypeColor}>Delete</Button>
+                    <Button.Group>
+                        <Button type='submit' color={this.state.complaintTypeColor} onClick={(event) => this.handleSubmit(event, this.props.complaintType.id)}>Submit</Button>
+                        <Button color={this.state.complaintTypeColor}>Disable</Button>
+                        <Button color={this.state.complaintTypeColor}>Delete</Button>
+                    </Button.Group>
                 </Card.Content>
             </Card>
             </Form>

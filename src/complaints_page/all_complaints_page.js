@@ -1,8 +1,6 @@
-import React, { Component, Children } from 'react';
-import { Grid } from 'semantic-ui-react'
+import React, { Component } from 'react';
 import ActualComplaint from './actual_complaint'
 import styled from '@emotion/styled'
-import Flexbox from 'flexbox-react';
 
 const MyContainer = styled.div`
   display: grid;
@@ -30,7 +28,7 @@ class AllComplaintsPage extends Component {
 
             <MyContainer>
                 
-                {this.props.userComplaints.map(function(complaint) { //add an IF statement to check for selected type and filter bugs according. - if ()
+                {this.props.userComplaints.map(function(complaint) {
                     if (this.props.selectedComplaintType === "showAll") {
 
                         return <MyBox key={complaint.id}>

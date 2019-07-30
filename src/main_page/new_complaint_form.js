@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Container } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import NewComplaintTypeForm from './new_complaint_type_form'
-import Equalizer from 'react-equalizer'
+import styled from '@emotion/styled'
 
 
 
@@ -13,6 +13,26 @@ const options = [
     {key: 4, text: 4, value: 4 },
     {key: 5, text: 5, value: 5 }
 ]
+
+const MyContainer = styled.div`
+  display: grid;
+  width: 80%;
+  justify-content: stretch;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-template-columns: [col-1-start] 1fr [col-2-start] 1fr [col-2-end];
+  grid-column-gap: 10%;
+  grid-row-gap: 10px;
+  margin-right: 15%;
+  margin-left: 15%;
+`
+
+const SubmitRow = styled.div`
+  grid-column-start: col-1-start;
+  grid-column-end: col-2-end;
+`
+
+
 
 class NewComplaintForm extends Component {
     
@@ -53,62 +73,59 @@ class NewComplaintForm extends Component {
         
     render() {
         return(
-            <Container>
-            <Grid columns={2} stackable >
-                <Grid.Row>
-                    <Grid.Column>
-                        <h2>What's bugging you right now?</h2>
-                    </Grid.Column>
+            
+            <MyContainer >
 
-                    <Grid.Column>
-                        <h2>Your Bug Types</h2>
-                    </Grid.Column>
-                </Grid.Row>
+                <h2 style={{marginTop: "2%"}} >Your Bug Types</h2>
+                <h2 style={{marginTop: "2%"}} >Your Bug Types</h2>
 
-                <Grid.Row>
-                    <Grid.Column>
-                        <Form>
-                            <Form.TextArea ref="node1" onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
-                            <Form.Select 
-                                fluid label='Severity' 
-                                options={options} 
-                                placeholder='Select Severity'
-                                selection
-                                value={this.state.complaintSeverity}
-                                onChange={this.handleSeverity}
-                            />
-                        </Form>
-                    </Grid.Column>
+                        
+                <textarea style={{height: "100%"}} onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
+                
+                <div>
+                    {this.props.complaint_types.map(function(complaintType) {
+                        return <Form.Radio
+                            label={complaintType.name} 
+                            name='complaintTypeGroup'
+                            value={complaintType.id}
+                            checked={this.state.complaintTypeId === complaintType.id}
+                            onChange={this.handleRadio}
+                            key={complaintType.id}
+                            style={{ alignItems: 'block' }}
+                        />
+                    }, this)}
+                </div>
+                
+                <div>
+                <h2>Severity</h2>
+                <Form.Select 
+                    options={options} 
+                    placeholder='Select Severity'
+                    selection
+                    value={this.state.complaintSeverity}
+                    onChange={this.handleSeverity}
+                    style={{width: "100%"}}
+                />
+                </div>
+                <NewComplaintTypeForm />
 
-                    <Grid.Column>
-                        {/* {console.log(this.props)} */}
-                        {this.props.complaint_types.map(function(complaintType) {
-                            return <Form.Radio ref="node2"
-                                label={complaintType.name} 
-                                name='complaintTypeGroup'
-                                value={complaintType.id}
-                                checked={this.state.complaintTypeId === complaintType.id}
-                                onChange={this.handleRadio}
-                                key={complaintType.id}
-                                style={{color: complaintType.color}}
-                            />
-                        }, this)}
-                        <NewComplaintTypeForm />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-            <Button 
-                type='submit' 
-                onClick={this.handleSubmit}
-                disabled={!this.state.complaintTypeId || !this.state.complaintSeverity || !this.state.complaintText}
-                >Submit</Button>
-            </Container>
+                <SubmitRow>
+                <Button 
+                    type='submit' 
+                    onClick={this.handleSubmit}
+                    disabled={!this.state.complaintTypeId || !this.state.complaintSeverity || !this.state.complaintText}
+                    >
+                    Submit
+                </Button>
+                </SubmitRow>
+
+        </MyContainer>
+       
         )
     }
 }
 
 function mapStateToProps(state) {
-    // console.log(state)
     return state.currentUser
 }
   
