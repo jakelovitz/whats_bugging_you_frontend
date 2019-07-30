@@ -84,7 +84,7 @@ class EditForm extends Component {
                     <Card.Content header={this.state.currentComplaintType.name}></Card.Content>
                     <Card.Content >
                         <Form.Field>
-                            <input label="Bug Info" placeholder={this.props.complaint.complaint_text} onChange={this.handleChange}/>
+                            <input label="Bug Info" defaultValue={this.props.complaint.complaint_text} onChange={this.handleChange}/>
                         </Form.Field>
                     
                         <Form.Select   
