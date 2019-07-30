@@ -60,7 +60,7 @@ class PieChart extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{width: "100%"}}>
                 {this.props.userComplaints &&
                 <canvas //having a stylings sheet for the div here to style, per Brockhoff
                     id="myChart"

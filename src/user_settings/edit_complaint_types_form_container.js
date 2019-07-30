@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import UpdateComplaintTypeForm from './complaint_type_form'
+import styled from '@emotion/styled'
+
+const MyContainer = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin-right: 10%;
+  margin-left: 10%;
+`
+
+const MyBox = styled.div`
+  margin: 2%;
+`
 
 class UpdateComplaintTypesContainer extends Component {
 
     render() {
         return(
-            <Grid centered={true} columns={2} >
-                <Grid.Row><h1>Feel free to update Bug types as well!</h1></Grid.Row>
-
+            <React.Fragment>
+            <h1>Feel free to update Bug types as well!</h1>
+            <MyContainer >
                 {this.props.currentUser.complaint_types.map(function(complaintType) {
-                    return <Grid.Column key={complaintType.id}>
-                        < UpdateComplaintTypeForm  complaintType={complaintType}/>
-                    </Grid.Column>
-                })}
-                
-            </Grid>
+                    return <MyBox key={complaintType.id}>
+                        < UpdateComplaintTypeForm style={{marginBottom: "20px"}} complaintType={complaintType} key={complaintType.id}/>
+                    </MyBox>
+                })}    
+            </MyContainer>
+            </React.Fragment>
         )
     }
 

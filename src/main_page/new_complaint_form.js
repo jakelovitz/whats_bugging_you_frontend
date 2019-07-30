@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Container } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import NewComplaintTypeForm from './new_complaint_type_form'
+import { RadioGroup, ReversedRadioButton } from 'react-radio-buttons';
+import styled from '@emotion/styled'
 
 
 
@@ -13,6 +15,26 @@ const options = [
     {key: 5, text: 5, value: 5 }
 ]
 
+const MyContainer = styled.div`
+  display: grid;
+  width: 80%;
+  justify-content: stretch;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-template-columns: [col-1-start] 1fr [col-2-start] 1fr [col-2-end];
+  grid-column-gap: 10%;
+  grid-row-gap: 10px;
+  margin-right: 15%;
+  margin-left: 15%;
+`
+
+const SubmitRow = styled.div`
+  grid-column-start: col-1-start;
+  grid-column-end: col-2-end;
+`
+
+
+
 class NewComplaintForm extends Component {
     
     state = {
@@ -22,7 +44,7 @@ class NewComplaintForm extends Component {
         complaintSeverity: ""
     }
     
-    handleRadio = (e, { value }) => this.setState({ complaintTypeId: value })
+    handleRadio = (value) => this.setState({ complaintTypeId: parseInt(value) })
 
     handleSeverity = (_e, { value }) => this.setState({ complaintSeverity: value })
 
@@ -50,66 +72,66 @@ class NewComplaintForm extends Component {
         .then(response => this.setState({ complaintText: "", complaintSeverity: ""}))
     }
         
-
     render() {
         return(
-            <Container>
-            <Grid columns={2} stackable >
-                <Grid.Row>
-                    <Grid.Column>
-                        <h2>What's bugging you right now?</h2>
-                    </Grid.Column>
+            
+            <MyContainer >
 
-                    <Grid.Column>
-                        <h2>Your Bug Types</h2>
-                    </Grid.Column>
-                </Grid.Row>
+                <h2 style={{marginTop: "2%"}} >What's Bugging You?</h2>
+                <h2 style={{marginTop: "2%"}} >Your Bug Types</h2>
 
-                <Grid.Row>
-                    <Grid.Column>
-                        <Form>
-                            <Form.TextArea onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
-                            <Form.Select 
-                                fluid label='Severity' 
-                                options={options} 
-                                placeholder='Select Severity'
-                                selection
-                                value={this.state.complaintSeverity}
-                                onChange={this.handleSeverity}
-                            />
-                        </Form>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                        {/* {console.log(this.props)} */}
+                        
+                <textarea style={{height: "100%"}} onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
+                
+                <div>
+                    <RadioGroup vertical="true" onChange={this.handleRadio}>
                         {this.props.complaint_types.map(function(complaintType) {
-                            return <Form.Radio 
-                                label={complaintType.name} 
-                                name='complaintTypeGroup'
-                                value={complaintType.id}
-                                checked={this.state.complaintTypeId === complaintType.id}
-                                onChange={this.handleRadio}
+                            return <ReversedRadioButton 
+                                value={complaintType.id.toString()} 
                                 key={complaintType.id}
-                                style={{color: complaintType.color}}
-                            />
+                                padding={1}
+                                iconSize={1}
+                                iconInnerSize={1}
+                                rootColor={complaintType.color}
+                                pointColor={"black"}
+                                style={{margins: "5%"}}
+                            >
+                                {complaintType.name}
+                            </ReversedRadioButton>
                         }, this)}
-                        <NewComplaintTypeForm />
-                    </Grid.Column>
+                    </RadioGroup>
+                </div>
+                
+                <div>
+                <h2>Severity</h2>
+                <Form.Select 
+                    options={options} 
+                    placeholder='Select Severity'
+                    selection
+                    value={this.state.complaintSeverity}
+                    onChange={this.handleSeverity}
+                    style={{width: "100%"}}
+                />
+                </div>
+                <NewComplaintTypeForm />
 
-                </Grid.Row>
-            </Grid>
-            <Button 
-                type='submit' 
-                onClick={this.handleSubmit}
-                disabled={!this.state.complaintTypeId || !this.state.complaintSeverity || !this.state.complaintText}
-                >Submit</Button>
-            </Container>
+                <SubmitRow>
+                <Button 
+                    type='submit' 
+                    onClick={this.handleSubmit}
+                    disabled={!this.state.complaintTypeId || !this.state.complaintSeverity || !this.state.complaintText}
+                    >
+                    Submit
+                </Button>
+                </SubmitRow>
+
+        </MyContainer>
+       
         )
     }
 }
 
 function mapStateToProps(state) {
-    // console.log(state)
     return state.currentUser
 }
   

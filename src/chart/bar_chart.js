@@ -3,6 +3,29 @@ import Chart from 'chart.js'
 // import classes from "./LineGraph.module.css";
 import { connect } from 'react-redux'
 
+
+function colorNameToHex(color) {
+    let colors = {
+        "red": "#B03060",
+        "orange": "#FE9A76",
+        "yellow":" #FFD700",
+        "olive": "#32CD32",
+        "green": "#016936",
+        "teal": "#008080",
+        "blue": "#0E6EB8",
+        "violet": "#EE82EE",
+        "purple": "#B413EC",
+        "pink": "#FF1493",
+        "brown": "#A52A2A",
+        "grey": "#A0A0A0",
+        "black": "#000000"
+    }
+
+    if (typeof colors[color.toLowerCase()] != 'undefined')
+        return colors[color.toLowerCase()];
+
+    return false;
+}
 class BarChart extends Component {
 
     state = {
@@ -40,7 +63,7 @@ class BarChart extends Component {
         return array.length
     }
 
-    componentWillMount = () => { //was componentWillMount
+    componentWillMount = () => {
         this.setState({
             complaintTypes: this.getComplaintTypeNames(),
             complaintNumbers: this.mapComplaintTypes(this.getComplaintTypeId())
@@ -57,34 +80,33 @@ class BarChart extends Component {
                     {
                         label: "Number of Bugs per Bug Type",
                         data: this.state.complaintNumbers,
-                        // backgroundColor: ["#008000", "#FF0000", "#D2B48C", "#A9A9A9"] write function to map over complaintTypes and return color
+                        backgroundColor: this.getColorHex()
                     }
                 ]
             },
             options: {
-                // scales: {
-                //     xAxes: [{
-                //         barPercentage: 1,
-                //         categoryPercentage: 1,
-                //         // barThickness: 'flex',
-                //         maxBarThickness: 8,
-                //         minBarLength: 2,
-                //         gridLines: {
-                //             offsetGridLines: true
-                //         }
-                //     }]
-                // }
+                legend: {display: false},
+                responsive: false
             }
         })
+    }
+
+    getColorHex = () => {
+
+        
+        let array = this.props.currentUser.complaint_types.map((complaintType) => {
+            return colorNameToHex(complaintType.color)
+        })
+        return array
     }
 
     render() {
 
         return(
 
-            <div>
+            <div style={{width: "100%"}}>
                 {this.props.userComplaints &&
-                <canvas //having a stylings sheet for the div here to style, per Brockhoff
+                <canvas style={{width: "100%"}}//having a stylings sheet for the div here to style, per Brockhoff
                     id="myChart"
                     ref={this.chartRef}
                 />

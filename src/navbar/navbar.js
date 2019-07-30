@@ -21,13 +21,9 @@ class Navbar extends Component {
           <Menu.Item header as={Link} to='/main'>
             What's Bugging You?
           </Menu.Item>
-
           <Menu.Item position="right" name="Your Bugs" as={Link} to='/your_bugs' />
-
           <Menu.Item position="right" name="Bug Breakdown" as={Link} to='/bug_breakdown' />
-
           <Menu.Item position="right" name="User Settings" as={Link} to='/user'  />
-
           <Menu.Item position="right" name="Logout" as={Link} to='/login' onClick={() => this.handleLogout()}  />
          
         </Container>
@@ -35,13 +31,11 @@ class Navbar extends Component {
     )
   }
 }
-
 function mapStateToProps(state) {
   return {
     userComplaints: state.userComplaints
   }
 }
-
 function mapDispatchToProps(dispatch){
   return {
     logUserOut: () => {
@@ -49,6 +43,4 @@ function mapDispatchToProps(dispatch){
     }
   }
 }
-
 export default (connect(mapStateToProps, mapDispatchToProps)(Navbar))
-  
