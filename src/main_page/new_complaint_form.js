@@ -65,10 +65,7 @@ class NewComplaintForm extends Component {
             body: JSON.stringify(this.state)
         })
         .then(res => res.json())
-        .then(response => {
-            // console.log(response)
-            this.props.addComplaint(response)
-         })
+        .then(response => {this.props.addComplaint(response)})
         .then(response => this.setState({ complaintText: "", complaintSeverity: ""}))
     }
         

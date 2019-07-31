@@ -32,28 +32,32 @@ class BarChart extends Component {
 
     chartRef = React.createRef()
 
-    getComplaintTypeNames = () => { //get array of names to map to this.state.complaintTypes
+    //get array of names to map to this.state.complaintTypes
+    getComplaintTypeNames = () => {
        let array = this.props.currentUser.complaint_types.map((complaintType) => {
             return complaintType.name
         })
         return array
     }
 
-    getComplaintTypeId = () => { //get array of complaintType IDs to map over to get number of complaints per complaint type
+    //get array of complaintType IDs to map over to get number of complaints per complaint type
+    getComplaintTypeId = () => {
         let array = this.props.currentUser.complaint_types.map((complaintType) => {
              return complaintType.id
          })
          return array
      }
 
-    mapComplaintTypes = (complaintTypesArray) => { //map over the IDs you got from the above function getComplaintTypeId
+    //map over the IDs you got from the above function getComplaintTypeId
+    mapComplaintTypes = (complaintTypesArray) => {
         let array = complaintTypesArray.map((complaintType) => {
             return this.getComplaintNumbers(complaintType)
         })
         return array
     }
 
-    getComplaintNumbers = (complaintTypeId) => { //map over array of complaints and filter by complaintTypeId to recieve the number of complaints per complaint type
+    //map over array of complaints and filter by complaintTypeId to recieve the number of complaints per complaint type
+    getComplaintNumbers = (complaintTypeId) => { 
         let array = this.props.userComplaints.filter(complaint => 
             complaint.complaint_type_id === parseInt(complaintTypeId)
         )
@@ -83,7 +87,21 @@ class BarChart extends Component {
             },
             options: {
                 legend: {display: false},
-                responsive: false
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                      display: true,
+                      ticks: {
+                        min: 1
+                      }
+                    }],
+                    yAxes: [{
+                      display: true,
+                      ticks: {
+                        min: 0
+                      }
+                    }]
+                }
             }
         })
     }
@@ -98,7 +116,8 @@ class BarChart extends Component {
     }
 
     render() {
-
+        // console.log(this.state)
+        // console.log(this.props.userComplaints)
         return(
 
             <div style={{width: "100%"}}>
