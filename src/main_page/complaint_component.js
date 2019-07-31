@@ -65,7 +65,7 @@ class Complaint extends Component {
         } else if (this.state.editToggle) {
             return (
                 <Container>
-                < EditForm fluid complaint={this.props.complaint} complaintType={this.state.complaintType} toggleEditForm={this.toggleEditForm} setTypeAfterEdit={this.setTypeAfterEdit}/>
+                < EditForm fluid complaint={this.props.complaint} complaintType={this.state.complaintType} complaintText={this.props.complaint.complaint_text} complaintSeverity={this.props.complaint.severity} toggleEditForm={this.toggleEditForm} setTypeAfterEdit={this.setTypeAfterEdit}/>
                 </Container>
             )
         } else {

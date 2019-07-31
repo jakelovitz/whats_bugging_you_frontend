@@ -33,7 +33,11 @@ function reducer(prevState = defaultState, action) {
         case "ADD_USER_COMPLAINTS_FROM_CHART_LOAD":
             return {...prevState, userComplaints: action.payload}
         case "REMOVE_COMPLAINT_TYPE":
-            return update(prevState, { currentUser: { complaint_types: { $splice: [[action.payload, 1]]}}})
+            return update(prevState, { currentUser: { complaint_types: { $splice: [[action.payload, 1]]}}} )
+        case "UPDATE_COMPLAINT_TYPE":
+            return update(prevState, { currentUser: { complaint_types: { [action.index]: {$set: action.payload}}}})
+        case "UPDATE_USER_COMPLAINTS":
+            return {...prevState, userComplaints: action.payload}
         default:
             return prevState
     }

@@ -5,7 +5,7 @@ import withAuth from '../withAuth'
 import { Grid } from 'semantic-ui-react'
 import FilterBar from './filter_bar'
 import AllComplaintsPage from './all_complaints_page'
-import styled from '@emotion/styled'
+
 
 class ComplaintsPageContainer extends Component {
 
@@ -33,6 +33,7 @@ class ComplaintsPageContainer extends Component {
       }
 
     render() {
+        console.log("USER COMPLAINTS", this.props.userComplaints)
         return(
             <React.Fragment>
             <Navbar />

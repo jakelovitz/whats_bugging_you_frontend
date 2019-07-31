@@ -77,6 +77,7 @@ class EditForm extends Component {
     handleChange = (event) => { this.setState({ newComplaintText: event.target.value }) }
 
     render() {
+        console.log(this.state)
         return (
             <React.Fragment>
                 <Form onSubmit={(event) => this.handleSubmit(event, this.props.complaint.id)}>
@@ -101,7 +102,7 @@ class EditForm extends Component {
                             options={this.complaintTypeOptions()}
                             placeholder={this.props.complaintType.name.toString()}
                             selection
-                            //removed value={this.state.newComplaintType} because it was causing numerous issues and prevented the placeholder from showing
+                            // removed value={this.state.newComplaintType} because it was causing numerous issues and prevented the placeholder from showing
                             onChange={this.handleComplaintType}
                         />
                     </Card.Content>

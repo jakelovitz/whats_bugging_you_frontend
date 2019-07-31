@@ -8,7 +8,6 @@ function colorNameToHex(color) {
     let colors = {
         "red": "#B03060",
         "orange": "#FE9A76",
-        "yellow":" #FFD700",
         "olive": "#32CD32",
         "green": "#016936",
         "teal": "#008080",
@@ -16,9 +15,7 @@ function colorNameToHex(color) {
         "violet": "#EE82EE",
         "purple": "#B413EC",
         "pink": "#FF1493",
-        "brown": "#A52A2A",
-        "grey": "#A0A0A0",
-        "black": "#000000"
+        "brown": "#A52A2A"
     }
 
     if (typeof colors[color.toLowerCase()] != 'undefined')

@@ -8,8 +8,8 @@ const MyContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  margin-right: 10%;
-  margin-left: 10%;
+  margin-right: 12%;
+  margin-left: 12%;
 `
 
 const MyBox = styled.div`

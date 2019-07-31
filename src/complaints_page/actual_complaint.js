@@ -16,13 +16,27 @@ const MyContent = styled.p`
   flex: 1 1 auto;
   align-self: stretch;
   height: 33%;
+  color: black;
+  & > a {
+    color: green;
+  }
+  & > bold {
+    font-weight: bold
+  }
 `
 
-const MyReaction = styled.p`
+const MyReaction = styled(`span`)`
   padding: 1px;
   flex: 1 1 auto;
   align-self: stretch;
   height: 33%;
+  color: black;
+  & > a {
+    color: green;
+  }
+  & > bold {
+    font-weight: bold
+  }
 `
 
 
@@ -38,7 +52,7 @@ class ActualComplaint extends Component {
         let returnValue
         if (this.props.complaint.reactions.length !== 0) {
             this.props.complaint.reactions.map((reaction) => {
-                returnValue = <MyReaction color={this.props.complaintType.color} >{reaction.cooldown_thoughts+ ", Post-Reflection Severity: " + reaction.updated_severity}</MyReaction>
+        returnValue = <MyReaction color={this.props.complaintType.color} ><bold>Reaction: </bold>{reaction.cooldown_thoughts} <bold><a>{reaction.updated_severity}</a></bold></MyReaction>
             })
         } else {
             returnValue = <MyReaction color={this.props.complaintType.color} >You haven't reacted to this bug yet!</MyReaction>
@@ -50,8 +64,8 @@ class ActualComplaint extends Component {
         // console.log(this.props)
         return(
             <MyCard color={this.props.complaintType.color}>
-                <MyContent color={this.props.complaintType.color} >{this.props.complaintType.name + ", Severity: " + this.props.complaint.severity}</MyContent>
-                <MyContent color={this.props.complaintType.color} >{"Bug: " +  this.props.complaint.complaint_text}</MyContent>
+                <MyContent color={this.props.complaintType.color} >{this.props.complaintType.name}</MyContent>
+                <MyContent color={this.props.complaintType.color} ><bold>Bug: </bold>{this.props.complaint.complaint_text} <bold><a>{this.props.complaint.severity}</a></bold></MyContent>
                 {this.reactions()}
             </MyCard>
         )

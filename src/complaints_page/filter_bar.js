@@ -17,21 +17,19 @@ const Button = styled.button`
 const MyContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
   flex-flow: row;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-right: 5%;
-  margin-left: 5%;
+  margin-right: 20%;
+  margin-left: 20%;
 `
 
-const MyBox = styled.div`
-  flex-basis: auto;
-  margin: auto;
-  align-items: center;
-  align-content: center;
-`
+// const MyBox = styled.div`
+//   flex-basis: auto;
+//   margin: auto;
+//   align-items: center;
+//   align-content: center;
+// `
 
 class FilterBar extends Component {
 
@@ -40,12 +38,10 @@ class FilterBar extends Component {
         return(
             <MyContainer>
 
-                    <MyBox><Button color="black" onClick={() => this.props.setSelectedComplaintType("showAll")}>Show all bugs</Button></MyBox>
+                <Button color="black" onClick={() => this.props.setSelectedComplaintType("showAll")}>Show all bugs</Button>
 
                 {this.props.currentUser.complaint_types.map(function(complaintType) {
-                    return <MyBox key={complaintType.id}>
-                        <Button key={complaintType.id} color={complaintType.color} onClick={() => this.props.setSelectedComplaintType(complaintType.name)}>{complaintType.name}</Button>
-                    </MyBox>
+                    return <Button key={complaintType.id} color={complaintType.color} onClick={() => this.props.setSelectedComplaintType(complaintType.name)}>{complaintType.name}</Button>   
                 }, this)}
 
             </MyContainer>
