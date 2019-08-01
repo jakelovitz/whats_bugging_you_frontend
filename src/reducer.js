@@ -3,7 +3,8 @@ import update from 'immutability-helper';
 const defaultState = {
     currentUser: null,
     userComplaints: [],
-    unreactedUserComplaints: []
+    unreactedUserComplaints: [],
+    complaintsToDisplay: []
 }
 
 function reducer(prevState = defaultState, action) {
@@ -29,6 +30,7 @@ function reducer(prevState = defaultState, action) {
         case "UPDATE_USER_SETTINGS":
             return {...prevState, currentUser: action.payload}
         case "ADD_ALL_USER_COMPLAINTS":
+            // debugger
             return {...prevState, userComplaints: action.payload}
         case "ADD_USER_COMPLAINTS_FROM_CHART_LOAD":
             return {...prevState, userComplaints: action.payload}

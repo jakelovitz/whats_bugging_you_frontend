@@ -34,7 +34,7 @@ const MyReaction = styled(`span`)`
   & > a {
     color: green;
   }
-  & > bold {
+  & > Bold {
     font-weight: bold
   }
 `
