@@ -48,10 +48,10 @@ class NewComplaintTypeForm extends Component {
         // console.log(this.state)
         return (
             <div>
-            <h2>Add a new Bug type!</h2>
+            <h2>Add a new Bug Species!</h2>
             <Form onSubmit={(event) => this.handleSubmit(event)}>
                 <Form.Field >
-                    <input placeholder='Bug Type' onChange={this.handleChange} value={this.state.complaintType}/>
+                    <input placeholder='Bug Species' onChange={this.handleChange} value={this.state.complaintType}/>
                 </Form.Field>
                 <Form.Select 
                     fluid label='Color'

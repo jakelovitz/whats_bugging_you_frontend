@@ -83,12 +83,12 @@ class UpdateComplaintTypeForm extends Component {
             <Card centered={true} color={this.state.complaintTypeColor}>
                 <Card.Content >
                     <Form.Field>
-                        <label>Update Bug Type Name</label>
+                        <label>Update Bug Species Name</label>
                         <input defaultValue={this.state.complaintTypeName} onChange={this.handleChange}></input>
                     </Form.Field>
 
                     <Form.Select 
-                    fluid label='Update Bug Type Color'
+                    fluid label='Update Bug Species Color'
                     placeholder='Select a color'
                     options={options}
                     selection
@@ -111,7 +111,7 @@ class UpdateComplaintTypeForm extends Component {
                 key={this.props.complaintType.id}
                 open={this.state.isModalOpen}
                 header="Important!"
-                content="Deleting this Bug Type will delete ALL the bugs associated. Are you sure you want to proceed?"
+                content="Deleting this Bug Species will delete ALL the bugs associated. Are you sure you want to proceed?"
                 actions={[
                     <React.Fragment>
                     <Button color="green" onClick={this.closeModal}>No</Button>

@@ -32,7 +32,7 @@ class UpdateComplaintTypesContainer extends Component {
             <MyContainer >
 
             <MyGreeting>
-                <h1 style={{justifyContent: "center"}}>Feel free to update Bug types as well!</h1>
+                <h1 style={{justifyContent: "center"}}>Feel free to update Bug Species as well!</h1>
             </MyGreeting>
 
                 {this.props.currentUser.complaint_types.map(function(complaintType) {

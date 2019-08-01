@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Menu, Container } from 'semantic-ui-react';
 
-
 class Navbar extends Component {
 
   handleLogout = () => {
@@ -16,9 +15,10 @@ class Navbar extends Component {
 
     return (
 
-      <Menu widths={5}>
+      <Menu widths={5} size={'huge'}>
         <Container>
-          <Menu.Item header as={Link} to='/main'>
+          <Menu.Item header as={Link} to='/main' >
+          <img src={require('../buggyguy.png')}/>
             What's Bugging You?
           </Menu.Item>
           <Menu.Item position="right" name="Your Bugs" as={Link} to='/your_bugs' />

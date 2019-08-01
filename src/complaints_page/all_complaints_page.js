@@ -78,7 +78,7 @@ class AllComplaintsPage extends Component {
             let orderComplaints = this.orderUserComplaints(this.props.userComplaints)
             this.setState({ complaintsToDisplay: orderComplaints})
         //Check to see if we need to end ordering by severity
-        } else if (this.props.severityChecked !== prevProps.severityChecked) {
+        } else if (this.props.severityChecked !== prevProps.severityChecked && this.props.severityChecked === false) {
             this.setState({ complaintsToDisplay: this.filterUserComplaints(this.props.userComplaints) })
         }
 
