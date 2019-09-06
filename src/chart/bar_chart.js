@@ -120,9 +120,9 @@ class BarChart extends Component {
         // console.log(this.props.userComplaints)
         return(
 
-            <div style={{width: "100%"}}>
+            <div style={{width: "90%", alignContent: "center", alignItems: "center"}}>
                 {this.props.userComplaints &&
-                <canvas style={{width: "100%"}}//having a stylings sheet for the div here to style, per Brockhoff
+                <canvas style={{width: "90%"}}//having a stylings sheet for the div here to style, per Brockhoff
                     id="myChart"
                     ref={this.chartRef}
                 />
