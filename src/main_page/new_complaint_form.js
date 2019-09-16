@@ -96,24 +96,6 @@ class NewComplaintForm extends Component {
                         
                 <textarea style={{height: "100%"}} onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
                 
-                {/* <div>
-                    <RadioGroup vertical="true" onChange={this.handleRadio}>
-                        {this.props.complaint_types.map(function(complaintType) {
-                            return <ReversedRadioButton
-                            css={{marginBottom: '10px'}}
-                            value={complaintType.id.toString()} 
-                            key={complaintType.id}
-                            padding={1}
-                            iconSize={1}
-                            iconInnerSize={1}
-                            rootColor={complaintType.color}
-                            pointColor={"black"}
-                            >
-                                {complaintType.name}
-                            </ReversedRadioButton>
-                        }, this)}
-                    </RadioGroup>
-                </div> */}
                 <RadioButtons species={this.props.complaint_types} handleRadio={this.handleRadio}/>
 
                 <div>
