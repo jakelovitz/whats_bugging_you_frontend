@@ -6,6 +6,7 @@ import NewComplaintTypeForm from './new_complaint_type_form'
 import { RadioGroup, ReversedRadioButton } from 'react-radio-buttons';
 import styled from '@emotion/styled'
 import { jsx } from '@emotion/core'
+import RadioButtons from './radio_buttons'
 
 
 
@@ -59,7 +60,7 @@ class NewComplaintForm extends Component {
         complaintSeverity: ""
     }
     
-    handleRadio = (value) => this.setState({ complaintTypeId: parseInt(value) })
+    handleRadio = (value) => this.setState({ complaintTypeId: value })
 
     handleSeverity = (_e, { value }) => this.setState({ complaintSeverity: value })
 
@@ -95,26 +96,8 @@ class NewComplaintForm extends Component {
                         
                 <textarea style={{height: "100%"}} onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
                 
-                <div>
-                    <RadioGroup vertical="true" onChange={this.handleRadio}>
-                        {this.props.complaint_types.map(function(complaintType) {
-                            return <ReversedRadioButton
-                            css={{marginBottom: '10px'}}
-                            // className={AdditionalStyling}
-                            value={complaintType.id.toString()} 
-                            key={complaintType.id}
-                            padding={1}
-                            iconSize={1}
-                            iconInnerSize={1}
-                            rootColor={complaintType.color}
-                            pointColor={"black"}
-                            >
-                                {complaintType.name}
-                            </ReversedRadioButton>
-                        }, this)}
-                    </RadioGroup>
-                </div>
-                
+                <RadioButtons species={this.props.complaint_types} handleRadio={this.handleRadio}/>
+
                 <div>
                 <h2>Severity</h2>
                 <Form.Select 

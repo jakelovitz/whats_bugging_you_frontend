@@ -10,7 +10,6 @@ import styled from '@emotion/styled'
 const MyContainer = styled.div`
   display: grid;
   align-items: center;
-  
   grid-row-gap: 20px;
 `
 //NOTE: I removed the specification that created two rows by default. May be necessary to re-implement
