@@ -3,6 +3,7 @@ import Chart from 'chart.js'
 // import classes from "./LineGraph.module.css";
 import { connect } from 'react-redux'
 
+let myChart;
 class PieChart extends Component {
 
    chartRef = React.createRef()
@@ -33,14 +34,13 @@ class PieChart extends Component {
         })
         return [negative, positive, unreacted, unchanged]
     }
-    
-    componentDidUpdate() { //using component did update because I could immediately run a check to see if the component recieved a new complaint type, and I can run the function needed to get the required data without setting state
-            
+
+    componentDidMount() {
         let complaintsList = this.getComplaints(this.props.complaintType.id)
         let reactionData = this.sortComplaints(complaintsList)
 
         const myChartRef = this.chartRef.current.getContext("2d");
-        new Chart(myChartRef, {
+        myChart = new Chart(myChartRef, {
             type: "pie",
             data: {
                 labels: ["Bugs that got better with time", "Bugs that got worse with time", "Bugs that didn't change with time", "Bugs you haven't reacted to yet"],
@@ -57,9 +57,21 @@ class PieChart extends Component {
             }
         })
     }
+    
+    componentDidUpdate() { //using component did update because I could immediately run a check to see if the component recieved a new complaint type, and I can run the function needed to get the required data without setting state
+            
+        let complaintsList = this.getComplaints(this.props.complaintType.id)
+        let reactionData = this.sortComplaints(complaintsList)
+
+
+         myChart.data.datasets[0].data = [reactionData[1], reactionData[0], reactionData[3], reactionData[2]]
+         myChart.update();
+        
+    }
 
     render() {
         return (
+            <React.Fragment>
             <div style={{width: "100%"}}>
                 {this.props.userComplaints &&
                 <canvas //having a stylings sheet for the div here to style, per Brockhoff
@@ -68,6 +80,8 @@ class PieChart extends Component {
                 />
                 }
             </div>
+            <h2 style={{align: "center"}}>{this.props.complaintType.name}</h2>
+            </React.Fragment>
         )
     }
 

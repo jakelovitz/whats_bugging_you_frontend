@@ -40,12 +40,12 @@ class ChartContainer extends Component {
                 <Navbar />
                 <Grid container centered>
 
-                    <Grid.Row><h2>Number of Complaints Per Bug Type</h2></Grid.Row>
+                    <Grid.Row><h2>Number of Complaints Per Bug Species</h2></Grid.Row>
                     {(!!this.props.userComplaints.length) && //not sure why the .length is needed, but without it the check does not work correctly. All it does is make sure the userComplaints array is populated
-                        <Grid.Row><BarChart currentUser={this.props.currentUser} /></Grid.Row>
+                        <Grid.Row><BarChart /></Grid.Row>
                     }
 
-                    <Grid.Row><h2>Reactions By Bug Type</h2></Grid.Row>
+                    <Grid.Row><h2>Reactions By Bug Species</h2></Grid.Row>
 
                     <Grid.Row><ChartFilter setSelectedComplaintType={this.setSelectedComplaintType}/></Grid.Row>
 
@@ -74,4 +74,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(ChartContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(ChartContainer)) //don't forget to add mapDispatchToProps back in if you need it

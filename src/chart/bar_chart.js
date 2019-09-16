@@ -8,7 +8,6 @@ function colorNameToHex(color) {
     let colors = {
         "red": "#B03060",
         "orange": "#FE9A76",
-        "yellow":" #FFD700",
         "olive": "#32CD32",
         "green": "#016936",
         "teal": "#008080",
@@ -16,9 +15,7 @@ function colorNameToHex(color) {
         "violet": "#EE82EE",
         "purple": "#B413EC",
         "pink": "#FF1493",
-        "brown": "#A52A2A",
-        "grey": "#A0A0A0",
-        "black": "#000000"
+        "brown": "#A52A2A"
     }
 
     if (typeof colors[color.toLowerCase()] != 'undefined')
@@ -35,28 +32,32 @@ class BarChart extends Component {
 
     chartRef = React.createRef()
 
-    getComplaintTypeNames = () => { //get array of names to map to this.state.complaintTypes
+    //get array of names to map to this.state.complaintTypes
+    getComplaintTypeNames = () => {
        let array = this.props.currentUser.complaint_types.map((complaintType) => {
             return complaintType.name
         })
         return array
     }
 
-    getComplaintTypeId = () => { //get array of complaintType IDs to map over to get number of complaints per complaint type
+    //get array of complaintType IDs to map over to get number of complaints per complaint type
+    getComplaintTypeId = () => {
         let array = this.props.currentUser.complaint_types.map((complaintType) => {
              return complaintType.id
          })
          return array
      }
 
-    mapComplaintTypes = (complaintTypesArray) => { //map over the IDs you got from the above function getComplaintTypeId
+    //map over the IDs you got from the above function getComplaintTypeId
+    mapComplaintTypes = (complaintTypesArray) => {
         let array = complaintTypesArray.map((complaintType) => {
             return this.getComplaintNumbers(complaintType)
         })
         return array
     }
 
-    getComplaintNumbers = (complaintTypeId) => { //map over array of complaints and filter by complaintTypeId to recieve the number of complaints per complaint type
+    //map over array of complaints and filter by complaintTypeId to recieve the number of complaints per complaint type
+    getComplaintNumbers = (complaintTypeId) => { 
         let array = this.props.userComplaints.filter(complaint => 
             complaint.complaint_type_id === parseInt(complaintTypeId)
         )
@@ -86,7 +87,21 @@ class BarChart extends Component {
             },
             options: {
                 legend: {display: false},
-                responsive: false
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                      display: true,
+                      ticks: {
+                        min: 1
+                      }
+                    }],
+                    yAxes: [{
+                      display: true,
+                      ticks: {
+                        min: 0
+                      }
+                    }]
+                }
             }
         })
     }
@@ -101,12 +116,13 @@ class BarChart extends Component {
     }
 
     render() {
-
+        // console.log(this.state)
+        // console.log(this.props.userComplaints)
         return(
 
-            <div style={{width: "100%"}}>
+            <div style={{width: "90%", alignContent: "center", alignItems: "center"}}>
                 {this.props.userComplaints &&
-                <canvas style={{width: "100%"}}//having a stylings sheet for the div here to style, per Brockhoff
+                <canvas style={{width: "90%"}}//having a stylings sheet for the div here to style, per Brockhoff
                     id="myChart"
                     ref={this.chartRef}
                 />

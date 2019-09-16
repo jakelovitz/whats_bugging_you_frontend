@@ -56,7 +56,7 @@ class NewReaction extends Component {
         return(
             <Container>
                 <Form>
-                    <Form.TextArea onChange={this.handleChange} placeholder="Tell us what's bugging you here" />
+                    <Form.TextArea onChange={this.handleChange} placeholder="Tell us how you feel about this bug now!" />
                     <Form.Select 
                         fluid label='Severity in Hindsight' 
                         options={options} 

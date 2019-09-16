@@ -1,9 +1,11 @@
+/** @jsx jsx */
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import NewComplaintTypeForm from './new_complaint_type_form'
 import { RadioGroup, ReversedRadioButton } from 'react-radio-buttons';
 import styled from '@emotion/styled'
+import { jsx } from '@emotion/core'
 
 
 
@@ -32,6 +34,19 @@ const SubmitRow = styled.div`
   grid-column-start: col-1-start;
   grid-column-end: col-2-end;
 `
+
+const AdditionalStylingChild = styled.div`
+    margin-bottom: 10px;
+      border-radius: 10px;
+`
+
+const AdditionalStyling = styled.div`
+  ${AdditionalStylingChild} {
+      margin-bottom: 10px;
+      border-radius: 10px;
+  }
+`
+
 
 
 
@@ -65,10 +80,7 @@ class NewComplaintForm extends Component {
             body: JSON.stringify(this.state)
         })
         .then(res => res.json())
-        .then(response => {
-            // console.log(response)
-            this.props.addComplaint(response)
-         })
+        .then(response => {this.props.addComplaint(response)})
         .then(response => this.setState({ complaintText: "", complaintSeverity: ""}))
     }
         
@@ -78,7 +90,7 @@ class NewComplaintForm extends Component {
             <MyContainer >
 
                 <h2 style={{marginTop: "2%"}} >What's Bugging You?</h2>
-                <h2 style={{marginTop: "2%"}} >Your Bug Types</h2>
+                <h2 style={{marginTop: "2%"}} >Your Bug Species</h2>
 
                         
                 <textarea style={{height: "100%"}} onChange={this.handleChange} placeholder="Tell us what's bugging you here" value={this.state.complaintText}/>
@@ -86,15 +98,16 @@ class NewComplaintForm extends Component {
                 <div>
                     <RadioGroup vertical="true" onChange={this.handleRadio}>
                         {this.props.complaint_types.map(function(complaintType) {
-                            return <ReversedRadioButton 
-                                value={complaintType.id.toString()} 
-                                key={complaintType.id}
-                                padding={1}
-                                iconSize={1}
-                                iconInnerSize={1}
-                                rootColor={complaintType.color}
-                                pointColor={"black"}
-                                style={{margins: "5%"}}
+                            return <ReversedRadioButton
+                            css={{marginBottom: '10px'}}
+                            // className={AdditionalStyling}
+                            value={complaintType.id.toString()} 
+                            key={complaintType.id}
+                            padding={1}
+                            iconSize={1}
+                            iconInnerSize={1}
+                            rootColor={complaintType.color}
+                            pointColor={"black"}
                             >
                                 {complaintType.name}
                             </ReversedRadioButton>

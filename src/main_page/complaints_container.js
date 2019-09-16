@@ -52,7 +52,7 @@ class ComplaintContainer extends Component {
             
             <React.Fragment>
               <Container >
-                <h1>These bugs are waiting for a reaction!</h1>
+                <h1>{ this.props.unreactedUserComplaints.length === 0 ? "You have no Bugs waiting for a reaction. Want to add some more?" : "These Bugs are waiting for a reaction!"}</h1>
                 <Grid columns={3} >
                   {this.props.unreactedUserComplaints.map((complaint) => {
                     return <ComplaintComponent key={complaint.id} complaint={complaint} handleReactionClick={this.handleReactionClick} />
