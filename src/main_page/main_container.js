@@ -5,6 +5,14 @@ import { Grid } from 'semantic-ui-react'
 import withAuth from '../withAuth'
 import NewComplaintForm from './new_complaint_form'
 import ComplaintContainer from './complaints_container'
+import styled from '@emotion/styled'
+
+const MyContainer = styled.div`
+    display: grid;
+    width: 90%;
+    border: 2px black solid;
+    justify-items: center;
+`
 
 class MainContainer extends Component {
 
@@ -12,11 +20,11 @@ class MainContainer extends Component {
         return(
             <React.Fragment>
                 <Navbar />
-                <Grid>
-                    <Grid.Row centered={true}><ComplaintContainer/></Grid.Row>
+                <MyContainer>
+                    <ComplaintContainer/>
                     
-                    <Grid.Row centered={true}><NewComplaintForm /></Grid.Row>
-                </Grid>
+                    <NewComplaintForm />
+                </MyContainer>
             </React.Fragment>
         )
     }

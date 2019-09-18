@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Grid, Container, Loader, Dimmer, Segment } from 'semantic-ui-react'
 import ComplaintComponent from './complaint_component'
+import styled from '@emotion/styled'
+
+const MyContainer = styled.div`
+  display: grid;
+  grid-template-rows: stretch stretch;
+  width: 80%;
+  grid-row-gap: 3%;
+`
 
 class ComplaintContainer extends Component {
 
@@ -50,16 +58,17 @@ class ComplaintContainer extends Component {
         } else {
           return (
             
-            <React.Fragment>
-              <Container >
+            
+              
+                <MyContainer >
                 <h1>{ this.props.unreactedUserComplaints.length === 0 ? "You have no Bugs waiting for a reaction. Want to add some more?" : "These Bugs are waiting for a reaction!"}</h1>
-                <Grid columns={3} >
                   {this.props.unreactedUserComplaints.map((complaint) => {
                     return <ComplaintComponent key={complaint.id} complaint={complaint} handleReactionClick={this.handleReactionClick} />
                   })}
-                </ Grid>
-              </Container>
-            </React.Fragment>
+
+                </ MyContainer>
+            
+            
 
           )
     }
