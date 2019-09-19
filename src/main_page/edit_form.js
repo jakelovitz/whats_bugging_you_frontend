@@ -1,6 +1,44 @@
 import React, { Component } from 'react';
 import { Button, Card, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import styled from '@emotion/styled'
+
+const MyCard = styled.div`
+    display: grid;
+    width: 80%;
+    grid-template-rows: auto auto auto;
+    justify-self: center;
+    border: 5px solid ${props => props.color};
+    border-radius: 20px;
+    height: 100%;
+`
+
+const MyHeader = styled.div`
+    border-bottom: 2px dotted ${props => props.color};
+    height: min-content;
+    padding: 10px;
+`
+
+const MyBody = styled.div`
+    display: grid;
+    grid-template-rows: auto auto auto;
+  
+    height: 100%;
+    align-content: center;
+    grid-row-gap: 3%;
+    padding-top: 7px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 5%;
+
+
+    border-bottom: 2px dotted ${props => props.color};
+`
+
+const MyButtons = styled.div`
+    height: min-content;
+    padding: 10px;
+`
 
 const options = [
     {key: 1, text: 1, value: 1 },
@@ -80,38 +118,55 @@ class EditForm extends Component {
         console.log(this.state)
         return (
             <React.Fragment>
+                <MyCard color={this.state.currentComplaintType.color}>
                 <Form onSubmit={(event) => this.handleSubmit(event, this.props.complaint.id)}>
-                <Card fluid color={this.state.currentComplaintType.color}>
-                    <Card.Content header={this.state.currentComplaintType.name}></Card.Content>
-                    <Card.Content >
-                        <Form.Field>
-                            <input label="Bug Info" defaultValue={this.props.complaint.complaint_text} onChange={this.handleChange}/>
-                        </Form.Field>
-                    
-                        <Form.Select   
-                            label='Bug Severity' 
-                            options={options} 
-                            placeholder={this.props.complaint.severity.toString()}
-                            selection
-                            value={this.state.newComplaintSeverity}
-                            onChange={this.handleSeverity}
-                        />
 
+                    <MyHeader >{this.state.currentComplaintType.name}</MyHeader>
+
+                    <MyBody >
+                       
+                        <div>
+                            <p style={{fontWeight: "bold"}}>Bug Info:</p>
+                            <textarea
+                                label="Bug Info"
+                                defaultValue={this.props.complaint.complaint_text}
+                                onChange={this.handleChange}
+                                style={{height: "100%"}}
+                            />
+                        </div>
+
+                        <div>
+                            <p style={{fontWeight: "bold"}}>Bug Severity:</p>
+                            <Form.Select   
+                                 
+                                options={options} 
+                                placeholder={this.props.complaint.severity.toString()}
+                                selection
+                                value={this.state.newComplaintSeverity}
+                                onChange={this.handleSeverity}
+                            />
+                        </div>
+
+                        <div>
+                        <p style={{fontWeight: "bold"}}>Bug Type:</p>
                         <Form.Select
-                            label='Bug Type'
+                            
                             options={this.complaintTypeOptions()}
                             placeholder={this.props.complaintType.name.toString()}
                             selection
                             // removed value={this.state.newComplaintType} because it was causing numerous issues and prevented the placeholder from showing
                             onChange={this.handleComplaintType}
                         />
-                    </Card.Content>
-                    <Card.Content>
+                        </div>
+                    </MyBody>
+
+                    <MyButtons>
                         <Button onClick={() => this.props.toggleEditForm()} color={this.state.currentComplaintType.color} >Don't Edit</Button>
                         <Button disabled={!this.state.newComplaintType || !this.state.newComplaintSeverity || !this.state.newComplaintSeverity} color={this.state.currentComplaintType.color}>Submit</Button>
-                    </Card.Content>
-                </Card>
+                    </MyButtons>
+
                 </Form>
+                </MyCard>
             </React.Fragment>
         )
     }

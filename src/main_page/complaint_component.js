@@ -23,7 +23,7 @@ const MyHeader = styled.div`
     grid-template-gap: 2%;
     border-bottom: 2px dotted ${props => props.color};
     height: min-content;
-    padding: 1px;
+    padding: 10px;
 `
 const BugType = styled.div`
     grid-column-start: 2;
@@ -39,6 +39,7 @@ const MyBug = styled.div`
     border-bottom: 2px dotted ${props => props.color};
     height: min-content;
     padding: 1px;
+    padding: 10px;
 `
 
 const MyReaction = styled.div`
@@ -124,9 +125,9 @@ class Complaint extends Component {
             )
         } else if (this.state.editToggle) {
             return (
-                <Container>
+                //was wrapped in a MyCard right here
                 < EditForm fluid complaint={this.props.complaint} complaintType={this.state.complaintType} complaintText={this.props.complaint.complaint_text} complaintSeverity={this.props.complaint.severity} toggleEditForm={this.toggleEditForm} setTypeAfterEdit={this.setTypeAfterEdit}/>
-                </Container>
+                
             )
         } else {
 
