@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Form, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import styled from '@emotion/styled'
+
+const MyReaction = styled.div`
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 2%;
+    width: auto;
+    padding: 2%;
+`
 
 const options = [
     {key: 0, text: 0, value: 0 },
@@ -54,20 +63,23 @@ class NewReaction extends Component {
     render() {
         // console.log("does this go twice?")
         return(
-            <Container>
-                <Form>
-                    <Form.TextArea onChange={this.handleChange} placeholder="Tell us how you feel about this bug now!" />
-                    <Form.Select 
-                        fluid label='Severity in Hindsight' 
-                        options={options} 
-                        placeholder='Select New Severity'
-                        selection
-                        value={options.value}
-                        onChange={this.handleSeverity}
-                    />
-                <Button type='submit' onClick={event => this.handleSubmit(event)}>Submit Reaction</Button>
-                </Form>
-            </Container>
+            <Form>
+                <MyReaction>
+                    <Form.TextArea styling={{height: 'stretch'}} onChange={this.handleChange} placeholder="Tell us how you feel about this bug now!" />
+                    
+                    <div styling={{width: 'auto'}}>
+                        <Form.Select 
+                            fluid label='Severity in Hindsight' 
+                            options={options} 
+                            placeholder='Select New Severity'
+                            selection
+                            value={options.value}
+                            onChange={this.handleSeverity}
+                        />
+                        <Button type='submit' onClick={event => this.handleSubmit(event)}>Submit Reaction</Button>
+                    </div>
+                </MyReaction>
+            </Form>
         )
     }
 }

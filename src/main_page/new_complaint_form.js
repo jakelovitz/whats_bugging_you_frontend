@@ -18,15 +18,18 @@ const options = [
     {key: 5, text: 5, value: 5 }
 ]
 
+// justify-content: stretch;
+//   justify-items: stretch;
+//   align-items: stretch;
+
 const MyContainer = styled.div`
   display: grid;
   width: 80%;
-  justify-content: stretch;
-  justify-items: stretch;
-  align-items: stretch;
+  
   grid-template-columns: [col-1-start] 1fr [col-2-start] 1fr [col-2-end];
   grid-column-gap: 10%;
   grid-row-gap: 10px;
+  margin-top: 5%;
   margin-right: 15%;
   margin-left: 15%;
 `
