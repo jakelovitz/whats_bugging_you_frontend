@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import LogInSignUp from './login_signup/login_signup_container'
 import 'semantic-ui-css/semantic.min.css'
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Grid } from 'semantic-ui-react'
-//only here for testing
+
 import MainContainer from './main_page/main_container'
 import { connect } from 'react-redux'
 import UserSettingsContainer from './user_settings/user_settings_container'
@@ -40,11 +40,12 @@ class App extends Component {
         <Grid.Row centered>
             <Switch>
 
-                <Route path="/main" component={MainContainer} />
+                <Route path="/" exact component={MainContainer} />
                 <Route path="/login" component={LogInSignUp} />
-                <Route path="/user" component={UserSettingsContainer} />
-                <Route path="/your_bugs" component={ComplaintsPageContainer} />
-                <Route path="/bug_breakdown" component={ChartContainer} />
+                <Route path="/user"  component={UserSettingsContainer} />
+                <Route path="/your_bugs"  component={ComplaintsPageContainer} />
+                <Route path="/bug_breakdown"  component={ChartContainer} />
+                <Route render={() => <Redirect to={{pathname: "/"}} />} />
 
             </Switch>
         </Grid.Row>
