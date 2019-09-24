@@ -10,7 +10,6 @@ import styled from '@emotion/styled'
 const MyContainer = styled.div`
     display: grid;
     width: 90%;
-    border: 2px black solid;
     justify-items: center;
 `
 

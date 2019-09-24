@@ -17,7 +17,7 @@ class Navbar extends Component {
 
       <Menu widths={5} size={'huge'}>
         <Container>
-          <Menu.Item header as={Link} to='/main' >
+          <Menu.Item header as={Link} to='/' >
           <img src={require('../buggyguy.png')}/>
             What's Bugging You?
           </Menu.Item>

@@ -41,7 +41,7 @@ class Login extends Component {
     render() {
         // console.log("LOGIN SCREEN PROPS", this.props)
         if (localStorage.getItem("token")) {
-            return <Redirect to="/main" />
+            return <Redirect to="/" />
         }
         return (   
             <div>
